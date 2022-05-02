@@ -34,7 +34,8 @@ class PqrfPage extends StatelessWidget {
             const HeaderWidget(),
             SingleChildScrollView(
               padding: EdgeInsets.symmetric(
-                  horizontal: size.width < 700 ? 40 : 100.0, vertical: 50.0),
+                  horizontal: size.width < 700 ? 25 : 100.0,
+                  vertical: size.width < 700 ? 18 : 50.0),
               child: Column(
                 children: [
                   size.width < 700
@@ -52,117 +53,183 @@ class PqrfPage extends StatelessWidget {
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(0, 4),
-                                blurRadius: 5.0)
-                          ],
-                          gradient: const LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            stops: [0.0, 1.0],
-                            colors: [
-                              Color(0xFF596FD7),
-                              Color(0xFF1488CC),
-                            ],
-                          ),
-                          color: Colors.deepPurple.shade300,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: SizedBox(
-                            width: 200.0,
-                            child: Row(
-                              children: const [
-                                Text(
-                                  "Adjuntar archivos",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18.0),
+                    children: size.width < 700
+                        ? [
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0, 4),
+                                      blurRadius: 5.0)
+                                ],
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  stops: [0.0, 1.0],
+                                  colors: [
+                                    Color(0xFF596FD7),
+                                    Color(0xFF1488CC),
+                                  ],
                                 ),
-                                SizedBox(width: 10),
-                                Icon(Icons.cloud_upload_rounded),
-                              ],
-                            ),
-                          ),
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
+                                color: Colors.deepPurple.shade300,
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.cloud_upload_rounded),
+                                tooltip: 'Adjuntar archivos',
+                                color: Colors.white,
                               ),
                             ),
-                            minimumSize:
-                                MaterialStateProperty.all(const Size(200, 50)),
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            // elevation: MaterialStateProperty.all(3),
-                            shadowColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(0, 4),
-                                blurRadius: 5.0)
-                          ],
-                          gradient: const LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            stops: [0.0, 1.0],
-                            colors: [
-                              Color(0xFF596FD7),
-                              Color(0xFF1488CC),
-                            ],
-                          ),
-                          color: Colors.deepPurple.shade300,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            pqrfProvider.validateForm();
-                          },
-                          child: SizedBox(
-                            width: 200.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: const [
-                                Text(
-                                  "Enviar",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18.0),
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0, 4),
+                                      blurRadius: 5.0)
+                                ],
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  stops: [0.0, 1.0],
+                                  colors: [
+                                    Color(0xFF596FD7),
+                                    Color(0xFF1488CC),
+                                  ],
                                 ),
-                                SizedBox(width: 10),
-                                Icon(Icons.send),
-                              ],
-                            ),
-                          ),
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
+                                color: Colors.deepPurple.shade300,
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: IconButton(
+                                onPressed: () {
+                                  pqrfProvider.validateForm();
+                                },
+                                icon: const Icon(Icons.send),
+                                tooltip: 'Enviar formulario',
+                                color: Colors.white,
                               ),
                             ),
-                            minimumSize:
-                                MaterialStateProperty.all(const Size(200, 50)),
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            // elevation: MaterialStateProperty.all(3),
-                            shadowColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                          ),
-                        ),
-                      ),
-                    ],
+                          ]
+                        : [
+                            Container(
+                              decoration: BoxDecoration(
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0, 4),
+                                      blurRadius: 5.0)
+                                ],
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  stops: [0.0, 1.0],
+                                  colors: [
+                                    Color(0xFF596FD7),
+                                    Color(0xFF1488CC),
+                                  ],
+                                ),
+                                color: Colors.deepPurple.shade300,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: SizedBox(
+                                  width: 200.0,
+                                  child: Row(
+                                    children: const [
+                                      Text(
+                                        "Adjuntar archivos",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18.0),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Icon(Icons.cloud_upload_rounded),
+                                    ],
+                                  ),
+                                ),
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                  minimumSize: MaterialStateProperty.all(
+                                      const Size(200, 50)),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.transparent),
+                                  // elevation: MaterialStateProperty.all(3),
+                                  shadowColor: MaterialStateProperty.all(
+                                      Colors.transparent),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0, 4),
+                                      blurRadius: 5.0)
+                                ],
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  stops: [0.0, 1.0],
+                                  colors: [
+                                    Color(0xFF596FD7),
+                                    Color(0xFF1488CC),
+                                  ],
+                                ),
+                                color: Colors.deepPurple.shade300,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  pqrfProvider.validateForm();
+                                },
+                                child: SizedBox(
+                                  width: 200.0,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: const [
+                                      Text(
+                                        "Enviar",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18.0),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Icon(Icons.send),
+                                    ],
+                                  ),
+                                ),
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                  minimumSize: MaterialStateProperty.all(
+                                      const Size(200, 50)),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.transparent),
+                                  // elevation: MaterialStateProperty.all(3),
+                                  shadowColor: MaterialStateProperty.all(
+                                      Colors.transparent),
+                                ),
+                              ),
+                            ),
+                          ],
                   ),
                 ],
               ),

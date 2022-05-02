@@ -136,8 +136,8 @@ class _SectionIdentifiedUserState extends State<SectionIdentifiedUser> {
             SizedBox(
               width: 300.0,
               child: Row(
-                children: [
-                  const Text('Asociado', style: TextStyle(fontSize: 16.0)),
+                children: const [
+                  Text('Asociado', style: TextStyle(fontSize: 16.0)),
                   Asociated(),
                 ],
               ),

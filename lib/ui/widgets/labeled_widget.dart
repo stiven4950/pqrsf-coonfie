@@ -76,7 +76,7 @@ class LabeledSelect extends StatelessWidget {
             ),
             isExpanded: true,
             value: selected,
-            style: const TextStyle(fontSize: 14.0),
+            style: const TextStyle(fontSize: 14.0, color: Colors.black),
             iconEnabledColor: Theme.of(context).primaryColor,
             icon: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0),

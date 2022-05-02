@@ -8,19 +8,24 @@ class HeaderWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+      padding: EdgeInsets.symmetric(horizontal: size.width < 700 ? 10 : 40.0),
       width: double.infinity,
       height: 100,
       decoration: const BoxDecoration(color: Color(0xFF4054B2)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset("assets/data/images/logo.png"),
-          const Text(
-            "Sistema PQRSF Coonfie",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 22.0,
+          Image.asset(
+            "assets/data/images/logo.png",
+            height: size.width < 700 ? 35 : 100,
+          ),
+          FittedBox(
+            child: Text(
+              "PQRSF Coonfie",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: size.width < 700 ? 16 : 20,
+              ),
             ),
           ),
           size.width < 700

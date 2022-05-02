@@ -21,16 +21,19 @@ class ButtonSectionWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         onPressed: () => menuSection.menu = order,
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 24.0),
+        child: FittedBox(
+          child: Text(
+            title,
+            style: TextStyle(fontSize: size.width < 700 ? 16 : 24),
+          ),
         ),
         style: ButtonStyle(
           side: MaterialStateProperty.resolveWith(
             (states) => const BorderSide(color: Color(0xFF596FD7), width: 1.0),
           ),
           minimumSize: MaterialStateProperty.resolveWith(
-            (states) => Size(size.width < 700 ? size.width : 400, 36),
+            (states) => Size(
+                size.width < 700 ? size.width : size.width * (1 / 3.8), 36),
           ),
           shape: MaterialStateProperty.resolveWith(
             (states) => const RoundedRectangleBorder(
