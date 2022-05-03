@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
 import 'package:pqrf_coonfie/ui/widgets/asociated.dart';
-
-import 'package:pqrf_coonfie/ui/widgets/widgets.dart';
+import 'package:pqrf_coonfie/ui/widgets/labeled_widget.dart';
 import 'package:provider/provider.dart';
 
-class SectionIdentifiedUser extends StatefulWidget {
-  const SectionIdentifiedUser({Key? key}) : super(key: key);
+import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
 
-  @override
-  State<SectionIdentifiedUser> createState() => _SectionIdentifiedUserState();
-}
+class SectionsPQRSF extends StatelessWidget {
+  const SectionsPQRSF({Key? key}) : super(key: key);
 
-class _SectionIdentifiedUserState extends State<SectionIdentifiedUser> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final pqrsfProvider = Provider.of<PQRSFProvider>(context);
 
-    final List<Widget> children = [
+    final List<Widget> childrenSectionUserIdentified = [
       SizedBox(
         width: size.width < 700 ? size.width * .9 : size.width * (1 / 4),
         child: Column(
@@ -203,11 +198,11 @@ class _SectionIdentifiedUserState extends State<SectionIdentifiedUser> {
       child: Form(
         key: pqrsfProvider.formKey,
         child: size.width < 700
-            ? Column(children: children)
+            ? Column(children: childrenSectionUserIdentified)
             : Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: children,
+                children: childrenSectionUserIdentified,
               ),
       ),
     );
