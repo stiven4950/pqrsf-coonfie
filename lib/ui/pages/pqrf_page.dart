@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
-import 'package:pqrf_coonfie/ui/pages/section_identified_user.dart';
-import 'package:pqrf_coonfie/ui/widgets/asociated.dart';
-import 'package:pqrf_coonfie/ui/widgets/widgets.dart';
+import 'package:pqrf_coonfie/ui/pages/anonim_user.dart';
+import 'package:pqrf_coonfie/ui/pages/consult.dart';
 import 'package:provider/provider.dart';
+
+import 'package:pqrf_coonfie/providers/menu_section.dart';
+import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
+import 'package:pqrf_coonfie/ui/pages/identified_user.dart';
+import 'package:pqrf_coonfie/ui/widgets/widgets.dart';
 
 class PqrfPage extends StatelessWidget {
   const PqrfPage({Key? key}) : super(key: key);
@@ -12,6 +15,7 @@ class PqrfPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final pqrsfProvider = Provider.of<PQRSFProvider>(context);
+    final menuSection = Provider.of<MenuSection>(context);
 
     const List<Widget> childrenButtonSection = [
       ButtonSectionWidget(
@@ -50,39 +54,46 @@ class PqrfPage extends StatelessWidget {
 
                   // -------------------------------------------------------------
 
-                  const SectionsPQRSF(),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: size.width < 700
-                        ? [
-                            CircularButton(
-                              tooltip: 'Adjuntar archivos',
-                              icon: Icons.cloud_upload_rounded,
-                              onPressed: () {},
-                            ),
-                            CircularButton(
-                              tooltip: 'Enviar formulario',
-                              icon: Icons.send,
-                              onPressed: () {
-                                pqrsfProvider.validateForm();
-                              },
-                            ),
-                          ]
-                        : [
-                            GradientButtonExtended(
-                              text: "Adjuntar archivos",
-                              icon: Icons.cloud_upload_rounded,
-                              onPressed: () {},
-                            ),
-                            GradientButtonExtended(
-                              text: "Enviar",
-                              icon: Icons.send,
-                              onPressed: () {
-                                pqrsfProvider.validateForm();
-                              },
-                            ),
-                          ],
+                  menuSection.menu == 1
+                      ? const UserIdentifiedSection()
+                      : menuSection.menu == 2
+                          ? const AnonimUser()
+                          : const Consult(),
+                  // -------------------------------------------------------------
+                  Visibility(
+                    visible: !(menuSection.menu == 3),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: size.width < 700
+                          ? [
+                              CircularButton(
+                                tooltip: 'Adjuntar archivos',
+                                icon: Icons.cloud_upload_rounded,
+                                onPressed: () {},
+                              ),
+                              CircularButton(
+                                tooltip: 'Enviar formulario',
+                                icon: Icons.send,
+                                onPressed: () {
+                                  pqrsfProvider.validateForm();
+                                },
+                              ),
+                            ]
+                          : [
+                              GradientButtonExtended(
+                                text: "Adjuntar archivos",
+                                icon: Icons.cloud_upload_rounded,
+                                onPressed: () {},
+                              ),
+                              GradientButtonExtended(
+                                text: "Enviar",
+                                icon: Icons.send,
+                                onPressed: () {
+                                  pqrsfProvider.validateForm();
+                                },
+                              ),
+                            ],
+                    ),
                   ),
                 ],
               ),

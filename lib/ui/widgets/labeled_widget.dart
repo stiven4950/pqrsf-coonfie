@@ -92,3 +92,39 @@ class LabeledSelect extends StatelessWidget {
     );
   }
 }
+
+class LabeledWidgetReadonly extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const LabeledWidgetReadonly(
+    this.label,
+    this.value, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: const TextStyle(fontSize: 16.0)),
+          const SizedBox(height: 5.0),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.indigo, width: 1.0),
+              boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 4.0)],
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Text(value),
+          ),
+        ],
+      ),
+    );
+  }
+}

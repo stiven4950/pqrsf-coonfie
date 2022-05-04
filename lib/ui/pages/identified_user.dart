@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
 import 'package:pqrf_coonfie/ui/widgets/asociated.dart';
 import 'package:pqrf_coonfie/ui/widgets/labeled_widget.dart';
+import 'package:pqrf_coonfie/ui/widgets/sections_widget.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
-
-class SectionsPQRSF extends StatelessWidget {
-  const SectionsPQRSF({Key? key}) : super(key: key);
+class UserIdentifiedSection extends StatelessWidget {
+  const UserIdentifiedSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final pqrsfProvider = Provider.of<PQRSFProvider>(context);
+    final size = MediaQuery.of(context).size;
 
-    final List<Widget> childrenSectionUserIdentified = [
+    final List<Widget> children = [
       SizedBox(
         width: size.width < 700 ? size.width * .9 : size.width * (1 / 4),
         child: Column(
@@ -183,28 +183,8 @@ class SectionsPQRSF extends StatelessWidget {
         ),
       ),
     ];
-
-    return Container(
-      margin: const EdgeInsets.only(top: 10.0, bottom: 20.0),
-      padding: const EdgeInsets.all(30.0),
-      width: size.width < 700 ? size.width : size.width * .9,
-      constraints: const BoxConstraints(minHeight: 400.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey, width: 1.0),
-        boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 4.0)],
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Form(
-        key: pqrsfProvider.formKey,
-        child: size.width < 700
-            ? Column(children: childrenSectionUserIdentified)
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: childrenSectionUserIdentified,
-              ),
-      ),
+    return SectionsPQRSF(
+      children: children,
     );
   }
 }
