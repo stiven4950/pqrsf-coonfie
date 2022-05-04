@@ -27,6 +27,11 @@ class UserIdentifiedSection extends StatelessWidget {
                 pqrsfProvider.documentType = value!;
                 FocusScope.of(context).requestFocus(FocusNode());
               },
+              validator: (value) {
+                return value!.isNotEmpty
+                    ? null
+                    : "Tipo de documento es requerido";
+              },
             ),
             LabeledWidget(
               'N° de documento',
@@ -36,7 +41,10 @@ class UserIdentifiedSection extends StatelessWidget {
                 String pattern = pqrsfProvider.regExpDocumentType;
                 RegExp regExp = RegExp(pattern);
 
-                return regExp.hasMatch(value ?? '')
+                if (value!.isEmpty) {
+                  return "N° de documento es requerido";
+                }
+                return regExp.hasMatch(value)
                     ? null
                     : 'Formato de documento inválido';
               },
@@ -48,6 +56,10 @@ class UserIdentifiedSection extends StatelessWidget {
               validator: (value) {
                 String pattern = r'[a-zA-Z\s]{5,50}';
                 RegExp regExp = RegExp(pattern);
+
+                if (value!.isEmpty) {
+                  return "Nombre o razón social es requerido";
+                }
 
                 return regExp.hasMatch(value ?? '')
                     ? null
@@ -75,6 +87,10 @@ class UserIdentifiedSection extends StatelessWidget {
                 String pattern = r'[3]\d{9}';
                 RegExp regExp = RegExp(pattern);
 
+                if (value!.isEmpty) {
+                  return "Celular es requerido";
+                }
+
                 return regExp.hasMatch(value ?? '')
                     ? null
                     : 'Formato de nombre inválido';
@@ -97,19 +113,27 @@ class UserIdentifiedSection extends StatelessWidget {
                     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                 RegExp regExp = RegExp(pattern);
 
+                if (value!.isEmpty) {
+                  return "Email es requerido";
+                }
+
                 return regExp.hasMatch(value ?? '')
                     ? null
                     : 'Formato de correo inválido';
               },
             ),
             LabeledSelect(
-                data: 'Ciudad o municipio',
-                hintText: 'Seleccione...',
-                dropdownItems: pqrsfProvider.cityItems,
-                selected: '',
-                onChanged: (value) {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                }),
+              data: 'Ciudad o municipio',
+              hintText: 'Seleccione...',
+              dropdownItems: pqrsfProvider.cityItems,
+              selected: '',
+              onChanged: (value) {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              validator: (value) {
+                return value!.isNotEmpty ? null : "Ciudad es requerido";
+              },
+            ),
             LabeledWidget(
               'Dirección de residencia',
               hintText: 'Digite su teléfono',
@@ -131,8 +155,8 @@ class UserIdentifiedSection extends StatelessWidget {
             SizedBox(
               width: 300.0,
               child: Row(
-                children: const [
-                  Text('Asociado', style: TextStyle(fontSize: 16.0)),
+                children: [
+                  const Text('Asociado', style: TextStyle(fontSize: 16.0)),
                   Asociated(),
                 ],
               ),
@@ -145,29 +169,41 @@ class UserIdentifiedSection extends StatelessWidget {
         child: Column(
           children: [
             LabeledSelect(
-                data: 'Tipo de petición',
-                hintText: 'Seleccione...',
-                dropdownItems: pqrsfProvider.requestItems,
-                selected: '',
-                onChanged: (value) {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                }),
+              data: 'Tipo de petición',
+              hintText: 'Seleccione...',
+              dropdownItems: pqrsfProvider.requestItems,
+              selected: '',
+              onChanged: (value) {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              validator: (value) {
+                return value!.isNotEmpty ? null : "Ciudad es requerido";
+              },
+            ),
             LabeledSelect(
-                data: 'Asunto',
-                hintText: 'Seleccione...',
-                dropdownItems: pqrsfProvider.matterItems,
-                selected: '',
-                onChanged: (value) {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                }),
+              data: 'Asunto',
+              hintText: 'Seleccione...',
+              dropdownItems: pqrsfProvider.matterItems,
+              selected: '',
+              onChanged: (value) {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              validator: (value) {
+                return value!.isNotEmpty ? null : "Ciudad es requerido";
+              },
+            ),
             LabeledSelect(
-                data: 'Medio',
-                hintText: 'Seleccione...',
-                dropdownItems: pqrsfProvider.mediumItems,
-                selected: '',
-                onChanged: (value) {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                }),
+              data: 'Medio',
+              hintText: 'Seleccione...',
+              dropdownItems: pqrsfProvider.mediumItems,
+              selected: '',
+              onChanged: (value) {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              validator: (value) {
+                return value!.isNotEmpty ? null : "Ciudad es requerido";
+              },
+            ),
             LabeledWidget(
               'Descripción',
               hintText: 'Describa su solicitud',
@@ -175,7 +211,7 @@ class UserIdentifiedSection extends StatelessWidget {
               validator: (value) {
                 return value!.length > 1 && value.length < 300
                     ? null
-                    : 'Formato de descripción inválido';
+                    : 'Descripción es requerido';
               },
               maxLines: 6,
             ),

@@ -48,6 +48,12 @@ class PQRSFProvider extends ChangeNotifier {
     TypeSelect('AGENCIA C', 'C'),
   ];
 
+  // Asociated
+  final List<TypeSelect> asociatedValues = [
+    TypeSelect("No", "0"),
+    TypeSelect("Sí", "1"),
+  ];
+
   final List<DropdownMenuItem<String>> agencyItems = agencyM
       .map(
         (e) => DropdownMenuItem<String>(
@@ -118,7 +124,7 @@ class PQRSFProvider extends ChangeNotifier {
   String city = '';
   String address = '';
   String agency = '';
-  bool asociated = false;
+  String _asociated = "0";
   String typeRequest = '';
   String matter = '';
   String medium = '';
@@ -158,6 +164,12 @@ class PQRSFProvider extends ChangeNotifier {
         regExpDocumentType = r'\b\d{10}\b';
     }
     notifyListeners();
-    print(regExpDocumentType);
+  }
+
+  String get asociated => _asociated;
+
+  set asociated(String value) {
+    _asociated = value;
+    notifyListeners();
   }
 }

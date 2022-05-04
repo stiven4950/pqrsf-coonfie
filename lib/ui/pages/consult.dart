@@ -19,14 +19,14 @@ class Consult extends StatelessWidget {
         child: Column(
           children: [
             const Text(
-              "Para realizar la consulta es importante que tenga disponible el numero de radicacion que se informo al momento de realizar su solicitud.",
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              "Por favor sleccione el numero de documento, registre el numero de documento y el numero de radicacion.",
+              "Para realizar la consulta es importante que tenga disponible el número de radicación que se informó al momento de realizar su solicitud.",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              "Por favor seleccione el tipo de documento, registre el número de documento y el número de radicación.",
             ),
             const SizedBox(height: 10),
             LabeledSelect(
@@ -89,7 +89,9 @@ class Consult extends StatelessWidget {
               visible: size.width < 700,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: size.width < 700
+                  ? MainAxisAlignment.center
+                  : MainAxisAlignment.start,
               children: [
                 Image.asset(
                   "assets/data/images/result.jpg",
@@ -145,6 +147,17 @@ class Consult extends StatelessWidget {
             const LabeledWidgetReadonly(
               "Fecha de respuesta",
               "04/05/2022",
+            ),
+            Visibility(
+              child: const SizedBox(
+                height: 30,
+              ),
+              visible: !(size.width < 700),
+            ),
+            GradientButtonExtended(
+              text: "Imprimir",
+              icon: Icons.print_rounded,
+              onPressed: () {},
             ),
           ],
         ),

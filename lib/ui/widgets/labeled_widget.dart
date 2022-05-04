@@ -49,6 +49,7 @@ class LabeledSelect extends StatelessWidget {
   final String hintText;
   final List<DropdownMenuItem<String>> dropdownItems;
   final void Function(String?)? onChanged;
+  final String? Function(String?)? validator;
 
   const LabeledSelect({
     Key? key,
@@ -57,6 +58,7 @@ class LabeledSelect extends StatelessWidget {
     required this.hintText,
     required this.dropdownItems,
     required this.onChanged,
+    this.validator,
   }) : super(key: key);
 
   //----------------------------------------------------------------------------
@@ -86,6 +88,7 @@ class LabeledSelect extends StatelessWidget {
             elevation: 16,
             onChanged: onChanged,
             items: dropdownItems,
+            validator: validator,
           ),
         ],
       ),
