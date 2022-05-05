@@ -3,6 +3,8 @@ import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
 import 'package:provider/provider.dart';
 
 class Asociated extends StatelessWidget {
+  const Asociated({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

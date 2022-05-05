@@ -22,30 +22,41 @@ class AnonimUser extends StatelessWidget {
               hintText: 'Digite su nombre',
               onChanged: (value) => pqrsfProvider.fullName,
               validator: (value) {
+                if (value!.isEmpty) {
+                  return null;
+                }
                 String pattern = r'[a-zA-Z\s]{5,50}';
                 RegExp regExp = RegExp(pattern);
 
-                return regExp.hasMatch(value ?? '')
+                return regExp.hasMatch(value)
                     ? null
                     : 'Formato de nombre inválido';
               },
             ),
             LabeledSelect(
-                data: 'Tipo de petición',
-                hintText: 'Seleccione...',
-                dropdownItems: pqrsfProvider.requestItems,
-                selected: '',
-                onChanged: (value) {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                }),
+              data: 'Tipo de petición',
+              hintText: 'Seleccione...',
+              dropdownItems: pqrsfProvider.requestItems,
+              selected: '',
+              onChanged: (value) {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              validator: (value) {
+                return value!.isEmpty ? "Tipo de petición es requerido" : null;
+              },
+            ),
             LabeledSelect(
-                data: 'Asunto',
-                hintText: 'Seleccione...',
-                dropdownItems: pqrsfProvider.matterItems,
-                selected: '',
-                onChanged: (value) {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                }),
+              data: 'Asunto',
+              hintText: 'Seleccione...',
+              dropdownItems: pqrsfProvider.matterItems,
+              selected: '',
+              onChanged: (value) {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              validator: (value) {
+                return value!.isEmpty ? "Asunto es requerido" : null;
+              },
+            ),
           ],
         ),
       ),

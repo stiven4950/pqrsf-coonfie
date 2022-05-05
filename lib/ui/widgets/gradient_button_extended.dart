@@ -35,13 +35,13 @@ class GradientButtonExtended extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         child: SizedBox(
-          width: 200.0,
+          width: 120,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 text,
-                style: const TextStyle(color: Colors.white, fontSize: 18.0),
+                style: const TextStyle(color: Colors.white, fontSize: 15.0),
               ),
               const SizedBox(width: 10),
               Icon(icon),
@@ -54,7 +54,7 @@ class GradientButtonExtended extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.0),
             ),
           ),
-          minimumSize: MaterialStateProperty.all(const Size(200, 50)),
+          minimumSize: MaterialStateProperty.all(const Size(150, 50)),
           backgroundColor: MaterialStateProperty.all(Colors.transparent),
           // elevation: MaterialStateProperty.all(3),
           shadowColor: MaterialStateProperty.all(Colors.transparent),

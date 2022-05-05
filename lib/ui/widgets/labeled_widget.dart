@@ -27,6 +27,7 @@ class LabeledWidget extends StatelessWidget {
           Text(data, style: const TextStyle(fontSize: 16.0)),
           const SizedBox(height: 5.0),
           TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             style: const TextStyle(fontSize: 14.0),
             cursorColor: Theme.of(context).primaryColor,
             keyboardType: TextInputType.text,
@@ -76,6 +77,7 @@ class LabeledSelect extends StatelessWidget {
             decoration: InputDecorations.authDecoration(
               hintText: hintText,
             ),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             isExpanded: true,
             value: selected,
             style: const TextStyle(fontSize: 14.0, color: Colors.black),

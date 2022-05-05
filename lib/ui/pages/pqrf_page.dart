@@ -76,12 +76,13 @@ class PqrfPage extends StatelessWidget {
                                 icon: Icons.send,
                                 onPressed: () {
                                   pqrsfProvider.validateForm();
+                                  _display(context);
                                 },
                               ),
                             ]
                           : [
                               GradientButtonExtended(
-                                text: "Adjuntar archivos",
+                                text: "Adjuntar",
                                 icon: Icons.cloud_upload_rounded,
                                 onPressed: () {},
                               ),
@@ -90,6 +91,22 @@ class PqrfPage extends StatelessWidget {
                                 icon: Icons.send,
                                 onPressed: () {
                                   pqrsfProvider.validateForm();
+
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        CustomDialog(
+                                      title: 'Proceso realizado con éxito!',
+                                      description: "",
+                                      buttonText: "Agregar",
+                                      color: const Color(0xFF4054B2),
+                                      icon: Icons.gpp_good,
+                                      widget: const PositiveResult(),
+                                      action: () {
+                                        _display(context);
+                                      },
+                                    ),
+                                  );
                                 },
                               ),
                             ],
@@ -104,3 +121,16 @@ class PqrfPage extends StatelessWidget {
     );
   }
 }
+
+Future _display(BuildContext context) => showDialog(
+      context: context,
+      builder: (BuildContext context) => CustomDialog(
+        title: 'Proceso realizado con éxito!',
+        description: "",
+        buttonText: "Agregar",
+        color: const Color(0xFF4054B2),
+        icon: Icons.gpp_good,
+        widget: const PositiveResult(),
+        action: () {},
+      ),
+    );

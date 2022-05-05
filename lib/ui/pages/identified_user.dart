@@ -61,7 +61,7 @@ class UserIdentifiedSection extends StatelessWidget {
                   return "Nombre o razón social es requerido";
                 }
 
-                return regExp.hasMatch(value ?? '')
+                return regExp.hasMatch(value)
                     ? null
                     : 'Formato de nombre inválido';
               },
@@ -74,7 +74,7 @@ class UserIdentifiedSection extends StatelessWidget {
                 String pattern = r'\d{10}';
                 RegExp regExp = RegExp(pattern);
 
-                return regExp.hasMatch(value ?? '')
+                return regExp.hasMatch(value!)
                     ? null
                     : 'Formato de nombre inválido';
               },
@@ -91,7 +91,7 @@ class UserIdentifiedSection extends StatelessWidget {
                   return "Celular es requerido";
                 }
 
-                return regExp.hasMatch(value ?? '')
+                return regExp.hasMatch(value)
                     ? null
                     : 'Formato de nombre inválido';
               },
@@ -117,7 +117,7 @@ class UserIdentifiedSection extends StatelessWidget {
                   return "Email es requerido";
                 }
 
-                return regExp.hasMatch(value ?? '')
+                return regExp.hasMatch(value)
                     ? null
                     : 'Formato de correo inválido';
               },
@@ -155,8 +155,8 @@ class UserIdentifiedSection extends StatelessWidget {
             SizedBox(
               width: 300.0,
               child: Row(
-                children: [
-                  const Text('Asociado', style: TextStyle(fontSize: 16.0)),
+                children: const [
+                  Text('Asociado', style: TextStyle(fontSize: 16.0)),
                   Asociated(),
                 ],
               ),

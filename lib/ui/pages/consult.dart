@@ -57,19 +57,21 @@ class Consult extends StatelessWidget {
               hintText: 'Digite el número de radicado',
               onChanged: (value) => pqrsfProvider.fullName,
               validator: (value) {
-                String pattern = r'[a-zA-Z\s]{5,50}';
+                String pattern = r'\b[a-zA-Z]{3}-\d{6}-[a-zA-Z0-9]{6}\b';
                 RegExp regExp = RegExp(pattern);
 
                 return regExp.hasMatch(value ?? '')
                     ? null
-                    : 'Formato de nombre inválido';
+                    : 'Formato de número inválido';
               },
             ),
             const SizedBox(height: 20),
             GradientButtonExtended(
               text: "Consultar",
               icon: Icons.manage_search_rounded,
-              onPressed: () {},
+              onPressed: () {
+                pqrsfProvider.validateForm();
+              },
             ),
           ],
         ),
