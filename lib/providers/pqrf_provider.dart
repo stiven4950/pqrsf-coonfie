@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:pqrf_coonfie/models/municipio_model.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:pqrf_coonfie/types/types.dart';
 
 class PQRSFProvider extends ChangeNotifier {
+  PQRSFProvider() {
+    bringMunicipio();
+  }
+
+  List<Municipios> municipios = [];
+
+  String _baseUrl = '10.10.2.75';
+
   // Document Type
   static List<TypeSelect> documentTypeM = [
     TypeSelect('Seleccione...', ''),
@@ -170,6 +180,20 @@ class PQRSFProvider extends ChangeNotifier {
 
   set asociated(String value) {
     _asociated = value;
+    notifyListeners();
+  }
+
+  Future<String> _getJsonData(String endpoint) async {
+    const route = 'PQRSF_back/serviciosparametria/traermunicipios';
+    final uri = Uri.http(_baseUrl, route);
+    final response = await http.get(uri);
+    return response.body;
+  }
+
+  void bringMunicipio() async {
+    final response = await _getJsonData(
+        "http://10.10.2.75/PQRSF_back/serviciosparametria/traermunicipios");
+    municipios = municipiosFromJson(response);
     notifyListeners();
   }
 }
