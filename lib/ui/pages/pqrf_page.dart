@@ -100,7 +100,7 @@ class PqrfPage extends StatelessWidget {
                                       description: "",
                                       buttonText: "Agregar",
                                       color: const Color(0xFF4054B2),
-                                      icon: Icons.gpp_good,
+                                      icon: Icons.check_circle,
                                       widget: const PositiveResult(),
                                       action: () {
                                         _display(context);

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pqrf_coonfie/models/agency_model.dart';
+import 'package:pqrf_coonfie/models/matter_model.dart';
 import 'package:pqrf_coonfie/models/municipio_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,11 +9,81 @@ import 'package:pqrf_coonfie/types/types.dart';
 class PQRSFProvider extends ChangeNotifier {
   PQRSFProvider() {
     bringMunicipio();
+    bringAgency();
   }
 
-  List<Municipios> municipios = [];
+  final String _baseUrl = '10.10.2.75';
+  Future<String> _getJsonData(
+    String endpoint, [
+    Map<String, dynamic>? queryParameters,
+  ]) async {
+    final uri = Uri.http(_baseUrl, endpoint, queryParameters);
+    final response = await http.get(uri);
+    return response.body;
+  }
 
-  String _baseUrl = '10.10.2.75';
+  // ---------------------------------------------------------------------------
+  // Peticiones a Web Service
+
+  void bringMunicipio() async {
+    final response =
+        await _getJsonData("PQRSF_back/serviciosparametria/traermunicipios");
+
+    final List<DropdownMenuItem<String>> data = municipiosFromJson(response)
+        .map(
+          (e) => DropdownMenuItem<String>(
+            value: e.municipioId,
+            child: Text(e.municipioDepartamento),
+          ),
+        )
+        .toList();
+
+    cityItems.addAll(data);
+    notifyListeners();
+  }
+
+  void bringAgency() async {
+    final response =
+        await _getJsonData("PQRSF_back/serviciosparametria/TraerAgencias");
+
+    final List<DropdownMenuItem<String>> data = agencyFromJson(response)
+        .map(
+          (e) => DropdownMenuItem<String>(
+            value: e.agenciaId.toString(),
+            child: Text(e.agenciaNombre),
+          ),
+        )
+        .toList();
+
+    agencyItems.addAll(data);
+    notifyListeners();
+  }
+
+  void bringMatter() async {
+    final response = await _getJsonData(
+        "PQRSF_back/serviciosparametria/TraerAsuntoTipos",
+        {'AsuntoTipo': typeRequest});
+
+    final List<DropdownMenuItem<String>> data = matterFromJson(response)
+        .map(
+          (e) => DropdownMenuItem<String>(
+            value: e.asuntoTipoId,
+            child: Text(e.asuntoTipoNom),
+          ),
+        )
+        .toList();
+
+    matter = '';
+
+    matterItems = [
+      const DropdownMenuItem<String>(
+        value: '',
+        child: Text('Seleccione'),
+      ),
+    ];
+    matterItems.addAll(data);
+    notifyListeners();
+  }
 
   // Document Type
   static List<TypeSelect> documentTypeM = [
@@ -34,28 +106,11 @@ class PQRSFProvider extends ChangeNotifier {
       .toList();
 
   // City
-  static List<TypeSelect> cityM = [
-    TypeSelect('Seleccione...', ''),
-    TypeSelect('NEIVA CENTRO', 'NC'),
-    TypeSelect('PITALITO CENTRO', 'PC'),
-    TypeSelect('CAMPOALEGRE HUILA', 'CH'),
-  ];
-
-  final List<DropdownMenuItem<String>> cityItems = cityM
-      .map(
-        (e) => DropdownMenuItem<String>(
-          value: e.value,
-          child: Text(e.key),
-        ),
-      )
-      .toList();
-
-  // Agency
-  static List<TypeSelect> agencyM = [
-    TypeSelect('Seleccione...', ''),
-    TypeSelect('AGENCIA A', 'A'),
-    TypeSelect('AGENCIA B', 'B'),
-    TypeSelect('AGENCIA C', 'C'),
+  List<DropdownMenuItem<String>> cityItems = [
+    const DropdownMenuItem<String>(
+      value: '',
+      child: Text('Seleccione'),
+    ),
   ];
 
   // Asociated
@@ -64,14 +119,14 @@ class PQRSFProvider extends ChangeNotifier {
     TypeSelect("Sí", "1"),
   ];
 
-  final List<DropdownMenuItem<String>> agencyItems = agencyM
-      .map(
-        (e) => DropdownMenuItem<String>(
-          value: e.value,
-          child: Text(e.key),
-        ),
-      )
-      .toList();
+  // Agency
+
+  final List<DropdownMenuItem<String>> agencyItems = [
+    const DropdownMenuItem<String>(
+      value: '',
+      child: Text('Seleccione'),
+    ),
+  ];
 
   // Request
   static List<TypeSelect> requestM = [
@@ -93,21 +148,13 @@ class PQRSFProvider extends ChangeNotifier {
       .toList();
 
   // Matter
-  static List<TypeSelect> matterM = [
-    TypeSelect('Seleccione...', ''),
-    TypeSelect('CRÉDITO FINANCIERO', 'F'),
-    TypeSelect('CRÉDITO NORMAL', 'N'),
-    TypeSelect('PRÉSTAMO', 'P'),
-  ];
 
-  final List<DropdownMenuItem<String>> matterItems = matterM
-      .map(
-        (e) => DropdownMenuItem<String>(
-          value: e.value,
-          child: Text(e.key),
-        ),
-      )
-      .toList();
+  List<DropdownMenuItem<String>> matterItems = [
+    const DropdownMenuItem<String>(
+      value: '',
+      child: Text('Seleccione'),
+    ),
+  ];
 
   // medium
   static List<TypeSelect> mediumM = [
@@ -141,6 +188,9 @@ class PQRSFProvider extends ChangeNotifier {
   String description = '';
   String regExpDocumentType = '';
 
+  // ---------------------------------------------------------------------------
+  // Validaciones del formulario
+
   final GlobalKey<FormState> _formKey = GlobalKey();
   get formKey => _formKey;
   bool isValidForm() {
@@ -150,6 +200,9 @@ class PQRSFProvider extends ChangeNotifier {
   void validateForm() {
     _formKey.currentState!.validate();
   }
+
+  // ---------------------------------------------------------------------------
+  // Getters y Setters
 
   set documentType(String value) {
     _documentType = value;
@@ -180,20 +233,6 @@ class PQRSFProvider extends ChangeNotifier {
 
   set asociated(String value) {
     _asociated = value;
-    notifyListeners();
-  }
-
-  Future<String> _getJsonData(String endpoint) async {
-    const route = 'PQRSF_back/serviciosparametria/traermunicipios';
-    final uri = Uri.http(_baseUrl, route);
-    final response = await http.get(uri);
-    return response.body;
-  }
-
-  void bringMunicipio() async {
-    final response = await _getJsonData(
-        "http://10.10.2.75/PQRSF_back/serviciosparametria/traermunicipios");
-    municipios = municipiosFromJson(response);
     notifyListeners();
   }
 }

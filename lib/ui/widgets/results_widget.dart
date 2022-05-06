@@ -18,11 +18,18 @@ class PositiveResult extends StatelessWidget {
             style: TextStyle(fontSize: 17.0),
           ),
           const SizedBox(height: 10),
-          Text(
-            generatedCode,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                generatedCode,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.copy_rounded)),
+            ],
+          )
         ],
       ),
     );

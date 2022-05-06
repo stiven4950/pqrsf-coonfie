@@ -126,8 +126,9 @@ class UserIdentifiedSection extends StatelessWidget {
               data: 'Ciudad o municipio',
               hintText: 'Seleccione...',
               dropdownItems: pqrsfProvider.cityItems,
-              selected: '',
+              selected: pqrsfProvider.city,
               onChanged: (value) {
+                pqrsfProvider.city = value!;
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               validator: (value) {
@@ -136,7 +137,7 @@ class UserIdentifiedSection extends StatelessWidget {
             ),
             LabeledWidget(
               'Dirección de residencia',
-              hintText: 'Digite su teléfono',
+              hintText: 'Digite su dirección',
               onChanged: (value) => pqrsfProvider.address,
               validator: (value) {
                 return value!.length > 1 && value.length < 25
@@ -148,7 +149,7 @@ class UserIdentifiedSection extends StatelessWidget {
                 data: 'Agencia',
                 hintText: 'Seleccione...',
                 dropdownItems: pqrsfProvider.agencyItems,
-                selected: '',
+                selected: pqrsfProvider.agency,
                 onChanged: (value) {
                   FocusScope.of(context).requestFocus(FocusNode());
                 }),
@@ -172,32 +173,36 @@ class UserIdentifiedSection extends StatelessWidget {
               data: 'Tipo de petición',
               hintText: 'Seleccione...',
               dropdownItems: pqrsfProvider.requestItems,
-              selected: '',
+              selected: pqrsfProvider.typeRequest,
               onChanged: (value) {
+                pqrsfProvider.typeRequest = value!;
+                pqrsfProvider.bringMatter();
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               validator: (value) {
-                return value!.isNotEmpty ? null : "Ciudad es requerido";
+                return value!.isNotEmpty ? null : "Tipo petición es requerido";
               },
             ),
             LabeledSelect(
               data: 'Asunto',
               hintText: 'Seleccione...',
               dropdownItems: pqrsfProvider.matterItems,
-              selected: '',
+              selected: pqrsfProvider.matter,
               onChanged: (value) {
+                pqrsfProvider.matter = value!;
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               validator: (value) {
-                return value!.isNotEmpty ? null : "Ciudad es requerido";
+                return value!.isNotEmpty ? null : "Asunto requerido";
               },
             ),
             LabeledSelect(
               data: 'Medio',
               hintText: 'Seleccione...',
               dropdownItems: pqrsfProvider.mediumItems,
-              selected: '',
+              selected: pqrsfProvider.medium,
               onChanged: (value) {
+                pqrsfProvider.medium = value!;
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               validator: (value) {

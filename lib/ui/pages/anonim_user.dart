@@ -37,8 +37,10 @@ class AnonimUser extends StatelessWidget {
               data: 'Tipo de petición',
               hintText: 'Seleccione...',
               dropdownItems: pqrsfProvider.requestItems,
-              selected: '',
+              selected: pqrsfProvider.typeRequest,
               onChanged: (value) {
+                pqrsfProvider.typeRequest = value!;
+                pqrsfProvider.bringMatter();
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               validator: (value) {
@@ -49,8 +51,9 @@ class AnonimUser extends StatelessWidget {
               data: 'Asunto',
               hintText: 'Seleccione...',
               dropdownItems: pqrsfProvider.matterItems,
-              selected: '',
+              selected: pqrsfProvider.matter,
               onChanged: (value) {
+                pqrsfProvider.matter = value!;
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               validator: (value) {
@@ -67,7 +70,7 @@ class AnonimUser extends StatelessWidget {
             LabeledWidget(
               'Descripción',
               hintText: 'Describa su solicitud',
-              onChanged: (value) => pqrsfProvider.address,
+              onChanged: (value) => pqrsfProvider.description,
               validator: (value) {
                 return value!.length > 1 && value.length < 300
                     ? null

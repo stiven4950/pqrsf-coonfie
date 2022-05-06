@@ -77,7 +77,7 @@ class CustomDialog extends StatelessWidget {
                   children: [
                     GradientButtonExtended(
                       text: "Aceptar",
-                      icon: Icons.copy_rounded,
+                      icon: Icons.play_arrow_rounded,
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],

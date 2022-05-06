@@ -80,7 +80,11 @@ class LabeledSelect extends StatelessWidget {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             isExpanded: true,
             value: selected,
-            style: const TextStyle(fontSize: 14.0, color: Colors.black),
+            style: const TextStyle(
+              fontSize: 14.0,
+              color: Colors.black,
+              overflow: TextOverflow.ellipsis,
+            ),
             iconEnabledColor: Theme.of(context).primaryColor,
             icon: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0),
