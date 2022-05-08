@@ -8,20 +8,20 @@ String agencyToJson(List<Agency> data) =>
 
 class Agency {
   Agency({
-    required this.agenciaId,
+    required this.objectId,
     required this.agenciaNombre,
   });
 
-  int agenciaId;
+  String objectId;
   String agenciaNombre;
 
   factory Agency.fromJson(Map<String, dynamic> json) => Agency(
-        agenciaId: json["AgenciaId"],
-        agenciaNombre: json["AgenciaNombre"],
+        objectId: json["objectId"],
+        agenciaNombre: json["agenciaNombre"],
       );
 
   Map<String, dynamic> toJson() => {
-        "AgenciaId": agenciaId,
-        "AgenciaNombre": agenciaNombre,
+        "objectId": objectId,
+        "agenciaNombre": agenciaNombre,
       };
 }

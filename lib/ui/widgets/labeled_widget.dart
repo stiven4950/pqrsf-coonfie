@@ -127,7 +127,13 @@ class LabeledWidgetReadonly extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Colors.indigo, width: 1.0),
-              boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 4.0)],
+              boxShadow: const [
+                BoxShadow(
+                  color: Color.fromARGB(255, 219, 218, 218),
+                  blurRadius: 4.0,
+                  offset: Offset(2, 2),
+                )
+              ],
               borderRadius: BorderRadius.circular(20.0),
             ),
             child: Text(value),

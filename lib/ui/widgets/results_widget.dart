@@ -27,7 +27,10 @@ class PositiveResult extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.copy_rounded)),
+                onPressed: () {},
+                icon: const Icon(Icons.copy_rounded),
+                tooltip: 'Aquí puedes copiar el número de radicado',
+              ),
             ],
           )
         ],

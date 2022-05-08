@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final matter = matterFromJson(jsonString);
-
 import 'dart:convert';
 
 List<Matter> matterFromJson(String str) =>
@@ -12,20 +8,20 @@ String matterToJson(List<Matter> data) =>
 
 class Matter {
   Matter({
-    required this.asuntoTipoId,
+    required this.objectId,
     required this.asuntoTipoNom,
   });
 
-  String asuntoTipoId;
+  String objectId;
   String asuntoTipoNom;
 
   factory Matter.fromJson(Map<String, dynamic> json) => Matter(
-        asuntoTipoId: json["AsuntoTipoID"],
-        asuntoTipoNom: json["AsuntoTipoNom"],
+        objectId: json["objectId"],
+        asuntoTipoNom: json["asuntoTipoNom"],
       );
 
   Map<String, dynamic> toJson() => {
-        "AsuntoTipoID": asuntoTipoId,
-        "AsuntoTipoNom": asuntoTipoNom,
+        "objectId": objectId,
+        "asuntoTipoNom": asuntoTipoNom,
       };
 }

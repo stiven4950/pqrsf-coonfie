@@ -12,12 +12,12 @@ class PQRSFProvider extends ChangeNotifier {
     bringAgency();
   }
 
-  final String _baseUrl = '10.10.2.75';
+  final String _baseUrl = 'cushyrifle.backendless.app';
   Future<String> _getJsonData(
     String endpoint, [
     Map<String, dynamic>? queryParameters,
   ]) async {
-    final uri = Uri.http(_baseUrl, endpoint, queryParameters);
+    final uri = Uri.https(_baseUrl, endpoint, queryParameters);
     final response = await http.get(uri);
     return response.body;
   }
@@ -26,13 +26,12 @@ class PQRSFProvider extends ChangeNotifier {
   // Peticiones a Web Service
 
   void bringMunicipio() async {
-    final response =
-        await _getJsonData("PQRSF_back/serviciosparametria/traermunicipios");
+    final response = await _getJsonData("api/data/city");
 
     final List<DropdownMenuItem<String>> data = municipiosFromJson(response)
         .map(
           (e) => DropdownMenuItem<String>(
-            value: e.municipioId,
+            value: e.objectId,
             child: Text(e.municipioDepartamento),
           ),
         )
@@ -43,13 +42,12 @@ class PQRSFProvider extends ChangeNotifier {
   }
 
   void bringAgency() async {
-    final response =
-        await _getJsonData("PQRSF_back/serviciosparametria/TraerAgencias");
+    final response = await _getJsonData("api/data/agency");
 
     final List<DropdownMenuItem<String>> data = agencyFromJson(response)
         .map(
           (e) => DropdownMenuItem<String>(
-            value: e.agenciaId.toString(),
+            value: e.objectId,
             child: Text(e.agenciaNombre),
           ),
         )
@@ -61,13 +59,12 @@ class PQRSFProvider extends ChangeNotifier {
 
   void bringMatter() async {
     final response = await _getJsonData(
-        "PQRSF_back/serviciosparametria/TraerAsuntoTipos",
-        {'AsuntoTipo': typeRequest});
+        "api/data/matter", {'where': "asuntoTipo='$typeRequest'"});
 
     final List<DropdownMenuItem<String>> data = matterFromJson(response)
         .map(
           (e) => DropdownMenuItem<String>(
-            value: e.asuntoTipoId,
+            value: e.objectId,
             child: Text(e.asuntoTipoNom),
           ),
         )
