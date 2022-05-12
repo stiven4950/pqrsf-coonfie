@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pqrf_coonfie/ui/pages/anonim_user.dart';
 import 'package:pqrf_coonfie/ui/pages/consult.dart';
@@ -69,7 +72,7 @@ class PqrfPage extends StatelessWidget {
                               CircularButton(
                                 tooltip: 'Adjuntar archivos',
                                 icon: Icons.cloud_upload_rounded,
-                                onPressed: () {},
+                                onPressed: () => _selectDocumentsUpload(),
                               ),
                               CircularButton(
                                 tooltip: 'Enviar formulario',
@@ -84,7 +87,7 @@ class PqrfPage extends StatelessWidget {
                               GradientButtonExtended(
                                 text: "Adjuntar",
                                 icon: Icons.cloud_upload_rounded,
-                                onPressed: () {},
+                                onPressed: () => _selectDocumentsUpload(),
                               ),
                               GradientButtonExtended(
                                 text: "Enviar",
@@ -134,3 +137,16 @@ Future _display(BuildContext context) => showDialog(
         action: () {},
       ),
     );
+
+void _selectDocumentsUpload() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    allowMultiple: true,
+    type: FileType.custom,
+    allowedExtensions: ['jpg', 'pdf', 'docx', 'png'],
+  );
+
+  if (result != null) {
+  } else {
+    // User canceled the picker
+  }
+}

@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pqrf_coonfie/models/agency_model.dart';
 import 'package:pqrf_coonfie/models/matter_model.dart';
@@ -26,12 +27,12 @@ class PQRSFProvider extends ChangeNotifier {
   // Peticiones a Web Service
 
   void bringMunicipio() async {
-    final response = await _getJsonData("api/data/city");
+    final response = await _getJsonData("api/data/city", {"pageSize": '100'});
 
     final List<DropdownMenuItem<String>> data = municipiosFromJson(response)
         .map(
           (e) => DropdownMenuItem<String>(
-            value: e.objectId,
+            value: e.municipioId,
             child: Text(e.municipioDepartamento),
           ),
         )
@@ -42,7 +43,7 @@ class PQRSFProvider extends ChangeNotifier {
   }
 
   void bringAgency() async {
-    final response = await _getJsonData("api/data/agency");
+    final response = await _getJsonData("api/data/agency", {"pageSize": '100'});
 
     final List<DropdownMenuItem<String>> data = agencyFromJson(response)
         .map(
@@ -58,8 +59,8 @@ class PQRSFProvider extends ChangeNotifier {
   }
 
   void bringMatter() async {
-    final response = await _getJsonData(
-        "api/data/matter", {'where': "asuntoTipo='$typeRequest'"});
+    final response = await _getJsonData("api/data/matter",
+        {'where': "asuntoTipo='$typeRequest'", "pageSize": '100'});
 
     final List<DropdownMenuItem<String>> data = matterFromJson(response)
         .map(
@@ -185,6 +186,8 @@ class PQRSFProvider extends ChangeNotifier {
   String description = '';
   String regExpDocumentType = '';
 
+  // Upload variable
+  FilePickerResult? result;
   // ---------------------------------------------------------------------------
   // Validaciones del formulario
 

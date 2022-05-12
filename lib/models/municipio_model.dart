@@ -8,20 +8,20 @@ String municipiosToJson(List<Municipios> data) =>
 
 class Municipios {
   Municipios({
-    required this.objectId,
+    required this.municipioId,
     required this.municipioDepartamento,
   });
 
-  String objectId;
+  String municipioId;
   String municipioDepartamento;
 
   factory Municipios.fromJson(Map<String, dynamic> json) => Municipios(
-        objectId: json["objectId"],
+        municipioId: json["municipioId"],
         municipioDepartamento: json["municipioDepartamento"],
       );
 
   Map<String, dynamic> toJson() => {
-        "objectId": objectId,
+        "municipioId": municipioId,
         "municipioDepartamento": municipioDepartamento,
       };
 }
