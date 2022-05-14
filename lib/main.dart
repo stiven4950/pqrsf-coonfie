@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pqrf_coonfie/providers/menu_section.dart';
-import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:pqrf_coonfie/ui/pages/pqrf_page.dart';
+import 'package:pqrf_coonfie/providers/providers.dart';
 
 void main() => runApp(const MyApp());
 

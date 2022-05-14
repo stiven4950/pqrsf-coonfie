@@ -1,15 +1,12 @@
-import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:pqrf_coonfie/ui/pages/anonim_user.dart';
-import 'package:pqrf_coonfie/ui/pages/consult.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pqrf_coonfie/providers/menu_section.dart';
-import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
+import 'package:pqrf_coonfie/ui/pages/anonim_user.dart';
+import 'package:pqrf_coonfie/ui/pages/consult.dart';
 import 'package:pqrf_coonfie/ui/pages/identified_user.dart';
 import 'package:pqrf_coonfie/ui/widgets/widgets.dart';
+import 'package:pqrf_coonfie/providers/providers.dart';
 
 class PqrfPage extends StatelessWidget {
   const PqrfPage({Key? key}) : super(key: key);

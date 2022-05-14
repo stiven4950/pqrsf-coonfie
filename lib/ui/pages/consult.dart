@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
-import 'package:pqrf_coonfie/ui/widgets/sections_widget.dart';
 import 'package:pqrf_coonfie/ui/widgets/widgets.dart';
+import 'package:pqrf_coonfie/providers/providers.dart';
 
 class Consult extends StatelessWidget {
   const Consult({Key? key}) : super(key: key);

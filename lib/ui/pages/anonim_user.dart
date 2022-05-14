@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
-import 'package:pqrf_coonfie/ui/widgets/labeled_widget.dart';
-import 'package:pqrf_coonfie/ui/widgets/sections_widget.dart';
 import 'package:provider/provider.dart';
+
+import 'package:pqrf_coonfie/ui/widgets/widgets.dart';
+import 'package:pqrf_coonfie/providers/providers.dart';
 
 class AnonimUser extends StatelessWidget {
   const AnonimUser({Key? key}) : super(key: key);
