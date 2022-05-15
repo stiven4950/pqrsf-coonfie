@@ -25,7 +25,7 @@ class AnonimUser extends StatelessWidget {
                 if (value!.isEmpty) {
                   return null;
                 }
-                String pattern = r'[a-zA-Z\s]{5,50}';
+                String pattern = r'^([a-zA-ZÀ-ÿ\u00f1\u00d1\s]{5,50})$';
                 RegExp regExp = RegExp(pattern);
 
                 return regExp.hasMatch(value)

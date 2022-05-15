@@ -19,10 +19,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'PQRSF | Coonfie',
-        initialRoute: "/pqrf",
-        routes: {
-          "/pqrf": (_) => const PqrfPage(),
-        },
+        home: const PqrfPage(),
         theme: ThemeData(fontFamily: "Poppins"),
       ),
     );

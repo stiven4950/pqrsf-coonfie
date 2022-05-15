@@ -91,22 +91,7 @@ class PqrfPage extends StatelessWidget {
                                 icon: Icons.send,
                                 onPressed: () {
                                   pqrsfProvider.validateForm();
-
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        CustomDialog(
-                                      title: 'Proceso realizado con éxito!',
-                                      description: "",
-                                      buttonText: "Agregar",
-                                      color: const Color(0xFF4054B2),
-                                      icon: Icons.check_circle,
-                                      widget: const PositiveResult(),
-                                      action: () {
-                                        _display(context);
-                                      },
-                                    ),
-                                  );
+                                  _display(context);
                                 },
                               ),
                             ],
@@ -129,7 +114,7 @@ Future _display(BuildContext context) => showDialog(
         description: "",
         buttonText: "Agregar",
         color: const Color(0xFF4054B2),
-        icon: Icons.gpp_good,
+        icon: Icons.check_circle,
         widget: const PositiveResult(),
         action: () {},
       ),

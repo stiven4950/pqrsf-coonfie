@@ -184,7 +184,7 @@ class PQRSFProvider extends ChangeNotifier {
   String matter = '';
   String medium = '';
   String description = '';
-  String regExpDocumentType = '';
+  String regExpDocumentType = r'^(\d{4,10})$';
 
   // Upload variable
   FilePickerResult? result;
@@ -208,23 +208,23 @@ class PQRSFProvider extends ChangeNotifier {
     _documentType = value;
     switch (value) {
       case 'C':
-        regExpDocumentType = r'\b\d{8,10}\b';
+        regExpDocumentType = r'^(\d{4,10})$';
         break;
       case "E":
-        regExpDocumentType = r'\b\d{6,7}\b';
+        regExpDocumentType = r'^(\d{6,7})$';
         break;
       case "N":
-        regExpDocumentType = r'\b(\d{9}-\d{1})\b';
+        regExpDocumentType = r'^(\d{9}-\d{1})$';
         break;
       case "P":
-        regExpDocumentType = r'\b[a-zA-Z]{2}\d{6}\b';
+        regExpDocumentType = r'^([a-zA-Z]{2}\d{6})$';
         break;
       case "R":
       case "T":
-        regExpDocumentType = r'\b\d{10}\b';
+        regExpDocumentType = r'^(\d{10})$';
         break;
       default:
-        regExpDocumentType = r'\b\d{10}\b';
+        regExpDocumentType = r'^(\d{4,10})$';
     }
     notifyListeners();
   }

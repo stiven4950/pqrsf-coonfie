@@ -37,6 +37,11 @@ class Consult extends StatelessWidget {
                 pqrsfProvider.documentType = value!;
                 FocusScope.of(context).requestFocus(FocusNode());
               },
+              validator: (value) {
+                return value!.isNotEmpty
+                    ? null
+                    : "Tipo de documento es requerido";
+              },
             ),
             LabeledWidget(
               'N° de documento',
@@ -56,7 +61,7 @@ class Consult extends StatelessWidget {
               hintText: 'Digite el número de radicado',
               onChanged: (value) => pqrsfProvider.fullName,
               validator: (value) {
-                String pattern = r'\b[a-zA-Z]{3}-\d{6}-[a-zA-Z0-9]{6}\b';
+                String pattern = r'^([a-zA-Z]{3}-\d{6}-[a-zA-Z0-9]{6})$';
                 RegExp regExp = RegExp(pattern);
 
                 return regExp.hasMatch(value ?? '')

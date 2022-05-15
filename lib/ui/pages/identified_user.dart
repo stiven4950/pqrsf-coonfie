@@ -53,7 +53,7 @@ class UserIdentifiedSection extends StatelessWidget {
               hintText: 'Digite su nombre',
               onChanged: (value) => pqrsfProvider.fullName,
               validator: (value) {
-                String pattern = r'[a-zA-Z\s]{5,50}';
+                String pattern = r'^([a-zA-ZÀ-ÿ\u00f1\u00d1\s]{5,50})$';
                 RegExp regExp = RegExp(pattern);
 
                 if (value!.isEmpty) {
@@ -70,12 +70,16 @@ class UserIdentifiedSection extends StatelessWidget {
               hintText: 'Digite su teléfono',
               onChanged: (value) => pqrsfProvider.fullName,
               validator: (value) {
-                String pattern = r'\d{10}';
+                String pattern = r'^(\d{10})$';
                 RegExp regExp = RegExp(pattern);
 
-                return regExp.hasMatch(value!)
+                if (value!.isEmpty) {
+                  return null;
+                }
+
+                return regExp.hasMatch(value)
                     ? null
-                    : 'Formato de nombre inválido';
+                    : 'Formato de teléfono inválido';
               },
             ),
             LabeledWidget(
@@ -83,7 +87,7 @@ class UserIdentifiedSection extends StatelessWidget {
               hintText: 'Digite su celular',
               onChanged: (value) => pqrsfProvider.fullName,
               validator: (value) {
-                String pattern = r'[3]\d{9}';
+                String pattern = r'^([3]\d{9})$';
                 RegExp regExp = RegExp(pattern);
 
                 if (value!.isEmpty) {
@@ -92,7 +96,7 @@ class UserIdentifiedSection extends StatelessWidget {
 
                 return regExp.hasMatch(value)
                     ? null
-                    : 'Formato de nombre inválido';
+                    : 'Formato de celular inválido';
               },
             ),
           ],
@@ -118,7 +122,7 @@ class UserIdentifiedSection extends StatelessWidget {
 
                 return regExp.hasMatch(value)
                     ? null
-                    : 'Formato de correo inválido';
+                    : 'Formato de Email inválido';
               },
             ),
             LabeledSelect(
@@ -145,13 +149,14 @@ class UserIdentifiedSection extends StatelessWidget {
               },
             ),
             LabeledSelect(
-                data: 'Agencia',
-                hintText: 'Seleccione...',
-                dropdownItems: pqrsfProvider.agencyItems,
-                selected: pqrsfProvider.agency,
-                onChanged: (value) {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                }),
+              data: 'Agencia',
+              hintText: 'Seleccione...',
+              dropdownItems: pqrsfProvider.agencyItems,
+              selected: pqrsfProvider.agency,
+              onChanged: (value) {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+            ),
             SizedBox(
               width: 300.0,
               child: Row(
