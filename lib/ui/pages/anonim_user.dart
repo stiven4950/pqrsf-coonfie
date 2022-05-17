@@ -20,7 +20,8 @@ class AnonimUser extends StatelessWidget {
             LabeledWidget(
               'Nombre y apellidos o razón social',
               hintText: 'Digite su nombre',
-              onChanged: (value) => pqrsfProvider.fullName,
+              initialValue: pqrsfProvider.fullName,
+              onChanged: (value) => pqrsfProvider.fullName = value,
               validator: (value) {
                 if (value!.isEmpty) {
                   return null;
@@ -70,11 +71,12 @@ class AnonimUser extends StatelessWidget {
             LabeledWidget(
               'Descripción',
               hintText: 'Describa su solicitud',
-              onChanged: (value) => pqrsfProvider.description,
+              initialValue: pqrsfProvider.description,
+              onChanged: (value) => pqrsfProvider.description = value,
               validator: (value) {
                 return value!.length > 1 && value.length < 300
                     ? null
-                    : 'Formato de descripción inválido';
+                    : 'Descripción es requerido';
               },
               maxLines: 6,
             ),

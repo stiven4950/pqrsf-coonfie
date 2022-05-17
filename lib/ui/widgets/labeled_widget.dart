@@ -4,6 +4,7 @@ import 'package:pqrf_coonfie/ui/decorations/input_decorations.dart';
 class LabeledWidget extends StatelessWidget {
   final String data;
   final String hintText;
+  final String initialValue;
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
   final int maxLines;
@@ -12,6 +13,7 @@ class LabeledWidget extends StatelessWidget {
     this.data, {
     Key? key,
     required this.hintText,
+    required this.initialValue,
     required this.validator,
     required this.onChanged,
     this.maxLines = 1,
@@ -34,6 +36,7 @@ class LabeledWidget extends StatelessWidget {
             decoration: InputDecorations.authDecoration(
               hintText: hintText,
             ),
+            initialValue: initialValue,
             onChanged: onChanged,
             validator: validator,
             maxLines: maxLines,

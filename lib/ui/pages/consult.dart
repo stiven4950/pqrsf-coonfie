@@ -32,7 +32,7 @@ class Consult extends StatelessWidget {
               data: "Tipo de documento",
               hintText: 'Seleccione...',
               dropdownItems: pqrsfProvider.documentTypeItems,
-              selected: '',
+              selected: pqrsfProvider.documentType,
               onChanged: (value) {
                 pqrsfProvider.documentType = value!;
                 FocusScope.of(context).requestFocus(FocusNode());
@@ -46,10 +46,10 @@ class Consult extends StatelessWidget {
             LabeledWidget(
               'N° de documento',
               hintText: 'Digite su número de documento',
-              onChanged: (value) => pqrsfProvider.documentNumber,
+              initialValue: pqrsfProvider.documentNumber,
+              onChanged: (value) => pqrsfProvider.documentNumber = value,
               validator: (value) {
-                String pattern = pqrsfProvider.regExpDocumentType;
-                RegExp regExp = RegExp(pattern);
+                RegExp regExp = RegExp(pqrsfProvider.regExpDocumentType);
 
                 return regExp.hasMatch(value ?? '')
                     ? null
@@ -59,7 +59,8 @@ class Consult extends StatelessWidget {
             LabeledWidget(
               'N° de radicado',
               hintText: 'Digite el número de radicado',
-              onChanged: (value) => pqrsfProvider.fullName,
+              initialValue: pqrsfProvider.filingNumber,
+              onChanged: (value) => pqrsfProvider.filingNumber = value,
               validator: (value) {
                 String pattern = r'^([a-zA-Z]{3}-\d{6}-[a-zA-Z0-9]{6})$';
                 RegExp regExp = RegExp(pattern);

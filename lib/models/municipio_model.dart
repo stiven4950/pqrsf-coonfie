@@ -16,12 +16,12 @@ class Municipios {
   String municipioDepartamento;
 
   factory Municipios.fromJson(Map<String, dynamic> json) => Municipios(
-        municipioId: json["municipioId"],
-        municipioDepartamento: json["municipioDepartamento"],
+        municipioId: json["MunicipioId"],
+        municipioDepartamento: json["MunicipioDepartamento"],
       );
 
   Map<String, dynamic> toJson() => {
-        "municipioId": municipioId,
-        "municipioDepartamento": municipioDepartamento,
+        "MunicipioId": municipioId,
+        "MunicipioDepartamento": municipioDepartamento,
       };
 }

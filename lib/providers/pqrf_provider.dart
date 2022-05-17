@@ -13,12 +13,12 @@ class PQRSFProvider extends ChangeNotifier {
     bringAgency();
   }
 
-  final String _baseUrl = 'cushyrifle.backendless.app';
+  final String _baseUrl = '10.10.2.75';
   Future<String> _getJsonData(
     String endpoint, [
     Map<String, dynamic>? queryParameters,
   ]) async {
-    final uri = Uri.https(_baseUrl, endpoint, queryParameters);
+    final uri = Uri.http(_baseUrl, endpoint, queryParameters);
     final response = await http.get(uri);
     return response.body;
   }
@@ -27,7 +27,8 @@ class PQRSFProvider extends ChangeNotifier {
   // Peticiones a Web Service
 
   void bringMunicipio() async {
-    final response = await _getJsonData("api/data/city", {"pageSize": '100'});
+    final response =
+        await _getJsonData("PQRSF_back/serviciosparametria/traermunicipios");
 
     final List<DropdownMenuItem<String>> data = municipiosFromJson(response)
         .map(
@@ -43,12 +44,13 @@ class PQRSFProvider extends ChangeNotifier {
   }
 
   void bringAgency() async {
-    final response = await _getJsonData("api/data/agency", {"pageSize": '100'});
+    final response =
+        await _getJsonData("PQRSF_back/serviciosparametria/Traeragencias");
 
     final List<DropdownMenuItem<String>> data = agencyFromJson(response)
         .map(
           (e) => DropdownMenuItem<String>(
-            value: e.objectId,
+            value: e.agenciaId.toString(),
             child: Text(e.agenciaNombre),
           ),
         )
@@ -59,13 +61,14 @@ class PQRSFProvider extends ChangeNotifier {
   }
 
   void bringMatter() async {
-    final response = await _getJsonData("api/data/matter",
-        {'where': "asuntoTipo='$typeRequest'", "pageSize": '100'});
+    final response = await _getJsonData(
+        "PQRSF_back/serviciosparametria/TraerAsuntoTipos",
+        {'AsuntoTipo': typeRequest});
 
     final List<DropdownMenuItem<String>> data = matterFromJson(response)
         .map(
           (e) => DropdownMenuItem<String>(
-            value: e.objectId,
+            value: e.asuntoTipoId,
             child: Text(e.asuntoTipoNom),
           ),
         )
@@ -171,20 +174,21 @@ class PQRSFProvider extends ChangeNotifier {
       .toList();
 
   String _documentType = '';
-  String documentNumber = '';
-  String fullName = '';
-  String telephone = '';
-  String phone = '';
-  String email = '';
-  String city = '';
-  String address = '';
-  String agency = '';
+  String _documentNumber = '';
+  String _fullName = '';
+  String _telephone = '';
+  String _phone = '';
+  String _email = '';
+  String _city = '';
+  String _address = '';
+  String _agency = '';
   String _asociated = "0";
-  String typeRequest = '';
-  String matter = '';
-  String medium = '';
-  String description = '';
-  String regExpDocumentType = r'^(\d{4,10})$';
+  String _typeRequest = '';
+  String _matter = '';
+  String _medium = '';
+  String _description = '';
+  String _regExpDocumentType = r'^(\d{4,10})$';
+  String _filingNumber = '';
 
   // Upload variable
   FilePickerResult? result;
@@ -202,7 +206,7 @@ class PQRSFProvider extends ChangeNotifier {
   }
 
   // ---------------------------------------------------------------------------
-  // Getters y Setters
+  // Setters
 
   set documentType(String value) {
     _documentType = value;
@@ -229,10 +233,100 @@ class PQRSFProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String get asociated => _asociated;
+  set documentNumber(String value) {
+    _documentNumber = value;
+    notifyListeners();
+  }
+
+  set fullName(String value) {
+    _fullName = value;
+    notifyListeners();
+  }
+
+  set telephone(String value) {
+    _telephone = value;
+    notifyListeners();
+  }
+
+  set phone(String value) {
+    _phone = value;
+    notifyListeners();
+  }
+
+  set email(String value) {
+    _email = value;
+    notifyListeners();
+  }
+
+  set city(String value) {
+    _city = value;
+    notifyListeners();
+  }
+
+  set address(String value) {
+    _address = value;
+    notifyListeners();
+  }
+
+  set agency(String value) {
+    _agency = value;
+    notifyListeners();
+  }
+
+  set typeRequest(String value) {
+    _typeRequest = value;
+    notifyListeners();
+  }
+
+  set matter(String value) {
+    _matter = value;
+    notifyListeners();
+  }
+
+  set medium(String value) {
+    _medium = value;
+    notifyListeners();
+  }
+
+  set description(String value) {
+    _description = value;
+    notifyListeners();
+  }
+
+  set regExpDocumentType(String value) {
+    _regExpDocumentType = value;
+    notifyListeners();
+  }
+
+  set filingNumber(String value) {
+    _filingNumber = value;
+    notifyListeners();
+  }
 
   set asociated(String value) {
     _asociated = value;
     notifyListeners();
   }
+
+  // Getters
+  String get documentType => _documentType;
+  String get documentNumber => _documentNumber;
+  String get fullName => _fullName;
+  String get telephone => _telephone;
+  String get phone => _phone;
+  String get email => _email;
+  String get city => _city;
+  String get address => _address;
+  String get agency => _agency;
+  String get typeRequest => _typeRequest;
+  String get matter => _matter;
+  String get medium => _medium;
+  String get description => _description;
+  String get regExpDocumentType => _regExpDocumentType;
+  String get filingNumber => _filingNumber;
+  String get asociated => _asociated;
+
+  // Process Data
+
+  void sendData() {}
 }

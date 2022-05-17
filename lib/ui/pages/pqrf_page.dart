@@ -53,12 +53,18 @@ class PqrfPage extends StatelessWidget {
                         ),
 
                   // -------------------------------------------------------------
-
-                  menuSection.menu == 1
-                      ? const UserIdentifiedSection()
-                      : menuSection.menu == 2
-                          ? const AnonimUser()
-                          : const Consult(),
+                  Visibility(
+                    child: const UserIdentifiedSection(),
+                    visible: menuSection.menu == 1,
+                  ),
+                  Visibility(
+                    child: const AnonimUser(),
+                    visible: menuSection.menu == 2,
+                  ),
+                  Visibility(
+                    child: const Consult(),
+                    visible: menuSection.menu == 3,
+                  ),
                   // -------------------------------------------------------------
                   Visibility(
                     visible: !(menuSection.menu == 3),
@@ -91,7 +97,8 @@ class PqrfPage extends StatelessWidget {
                                 icon: Icons.send,
                                 onPressed: () {
                                   pqrsfProvider.validateForm();
-                                  _display(context);
+                                  // _display(context);
+                                  pqrsfProvider.sendData();
                                 },
                               ),
                             ],

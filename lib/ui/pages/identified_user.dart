@@ -21,7 +21,7 @@ class UserIdentifiedSection extends StatelessWidget {
               data: "Tipo de documento",
               hintText: 'Seleccione...',
               dropdownItems: pqrsfProvider.documentTypeItems,
-              selected: '',
+              selected: pqrsfProvider.documentType,
               onChanged: (value) {
                 pqrsfProvider.documentType = value!;
                 FocusScope.of(context).requestFocus(FocusNode());
@@ -35,7 +35,8 @@ class UserIdentifiedSection extends StatelessWidget {
             LabeledWidget(
               'N° de documento',
               hintText: 'Digite su número de documento',
-              onChanged: (value) => pqrsfProvider.documentNumber,
+              initialValue: pqrsfProvider.documentNumber,
+              onChanged: (value) => pqrsfProvider.documentNumber = value,
               validator: (value) {
                 String pattern = pqrsfProvider.regExpDocumentType;
                 RegExp regExp = RegExp(pattern);
@@ -51,7 +52,8 @@ class UserIdentifiedSection extends StatelessWidget {
             LabeledWidget(
               'Nombre y apellidos o razón social',
               hintText: 'Digite su nombre',
-              onChanged: (value) => pqrsfProvider.fullName,
+              initialValue: pqrsfProvider.fullName,
+              onChanged: (value) => pqrsfProvider.fullName = value,
               validator: (value) {
                 String pattern = r'^([a-zA-ZÀ-ÿ\u00f1\u00d1\s]{5,50})$';
                 RegExp regExp = RegExp(pattern);
@@ -68,7 +70,8 @@ class UserIdentifiedSection extends StatelessWidget {
             LabeledWidget(
               'Teléfono',
               hintText: 'Digite su teléfono',
-              onChanged: (value) => pqrsfProvider.fullName,
+              initialValue: pqrsfProvider.telephone,
+              onChanged: (value) => pqrsfProvider.telephone = value,
               validator: (value) {
                 String pattern = r'^(\d{10})$';
                 RegExp regExp = RegExp(pattern);
@@ -85,7 +88,8 @@ class UserIdentifiedSection extends StatelessWidget {
             LabeledWidget(
               'Celular',
               hintText: 'Digite su celular',
-              onChanged: (value) => pqrsfProvider.fullName,
+              initialValue: pqrsfProvider.phone,
+              onChanged: (value) => pqrsfProvider.phone = value,
               validator: (value) {
                 String pattern = r'^([3]\d{9})$';
                 RegExp regExp = RegExp(pattern);
@@ -110,7 +114,8 @@ class UserIdentifiedSection extends StatelessWidget {
             LabeledWidget(
               'Correo',
               hintText: 'Digite su E-mail',
-              onChanged: (value) => pqrsfProvider.email,
+              initialValue: pqrsfProvider.email,
+              onChanged: (value) => pqrsfProvider.email = value,
               validator: (value) {
                 String pattern =
                     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -141,7 +146,8 @@ class UserIdentifiedSection extends StatelessWidget {
             LabeledWidget(
               'Dirección de residencia',
               hintText: 'Digite su dirección',
-              onChanged: (value) => pqrsfProvider.address,
+              initialValue: pqrsfProvider.address,
+              onChanged: (value) => pqrsfProvider.address = value,
               validator: (value) {
                 return value!.length > 1 && value.length < 25
                     ? null
@@ -216,7 +222,8 @@ class UserIdentifiedSection extends StatelessWidget {
             LabeledWidget(
               'Descripción',
               hintText: 'Describa su solicitud',
-              onChanged: (value) => pqrsfProvider.address,
+              initialValue: pqrsfProvider.description,
+              onChanged: (value) => pqrsfProvider.description = value,
               validator: (value) {
                 return value!.length > 1 && value.length < 300
                     ? null

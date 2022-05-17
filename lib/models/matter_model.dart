@@ -8,20 +8,20 @@ String matterToJson(List<Matter> data) =>
 
 class Matter {
   Matter({
-    required this.objectId,
+    required this.asuntoTipoId,
     required this.asuntoTipoNom,
   });
 
-  String objectId;
+  String asuntoTipoId;
   String asuntoTipoNom;
 
   factory Matter.fromJson(Map<String, dynamic> json) => Matter(
-        objectId: json["objectId"],
-        asuntoTipoNom: json["asuntoTipoNom"],
+        asuntoTipoId: json["AsuntoTipoID"],
+        asuntoTipoNom: json["AsuntoTipoNom"],
       );
 
   Map<String, dynamic> toJson() => {
-        "objectId": objectId,
-        "asuntoTipoNom": asuntoTipoNom,
+        "AsuntoTipoID": asuntoTipoId,
+        "AsuntoTipoNom": asuntoTipoNom,
       };
 }
