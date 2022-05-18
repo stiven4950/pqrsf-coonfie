@@ -30,16 +30,16 @@ class PQRSFProvider extends ChangeNotifier {
     final response =
         await _getJsonData("PQRSF_back/serviciosparametria/traermunicipios");
 
-    final List<DropdownMenuItem<String>> data = municipiosFromJson(response)
+    /* final List<DropdownMenuItem<String>> data = municipiosFromJson(response)
         .map(
           (e) => DropdownMenuItem<String>(
             value: e.municipioId,
             child: Text(e.municipioDepartamento),
           ),
         )
-        .toList();
+        .toList(); */
 
-    cityItems.addAll(data);
+    cityItems.addAll(municipiosFromJson(response));
     notifyListeners();
   }
 
@@ -107,12 +107,14 @@ class PQRSFProvider extends ChangeNotifier {
       .toList();
 
   // City
-  List<DropdownMenuItem<String>> cityItems = [
+  /* List<DropdownMenuItem<String>> cityItems = [
     const DropdownMenuItem<String>(
       value: '',
       child: Text('Seleccione'),
     ),
-  ];
+  ]; */
+
+  List<Municipios> cityItems = [];
 
   // Asociated
   final List<TypeSelect> asociatedValues = [
@@ -327,6 +329,14 @@ class PQRSFProvider extends ChangeNotifier {
   String get asociated => _asociated;
 
   // Process Data
-
   void sendData() {}
+
+  // RESPUESTA
+  String filingNumberAnswer = 'CGK-754875-1AY589';
+  String fullnameAnswer = 'OMAR STIVEN RIVERA ROCHA';
+  String documentNumberAnswer = '1083931052';
+  String typeRequestAnswer = 'QUEJA';
+  String filingDateAnswer = '12/03/2022';
+  String proccessStateAnswer = 'RESUELTO';
+  String dateAnswer = '04/05/2022';
 }

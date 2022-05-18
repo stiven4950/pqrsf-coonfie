@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pqrf_coonfie/models/models.dart';
+import 'package:pqrf_coonfie/ui/decorations/input_decorations.dart';
 import 'package:provider/provider.dart';
 
 import 'package:pqrf_coonfie/ui/widgets/widgets.dart';
 import 'package:pqrf_coonfie/providers/providers.dart';
+import 'package:searchfield/searchfield.dart';
 
 class UserIdentifiedSection extends StatelessWidget {
   const UserIdentifiedSection({Key? key}) : super(key: key);
@@ -113,6 +116,7 @@ class UserIdentifiedSection extends StatelessWidget {
           children: [
             LabeledWidget(
               'Correo',
+              key: const ValueKey('Correo'),
               hintText: 'Digite su E-mail',
               initialValue: pqrsfProvider.email,
               onChanged: (value) => pqrsfProvider.email = value,
@@ -130,7 +134,7 @@ class UserIdentifiedSection extends StatelessWidget {
                     : 'Formato de Email inválido';
               },
             ),
-            LabeledSelect(
+            /* LabeledSelect(
               data: 'Ciudad o municipio',
               hintText: 'Seleccione...',
               dropdownItems: pqrsfProvider.cityItems,
@@ -142,16 +146,46 @@ class UserIdentifiedSection extends StatelessWidget {
               validator: (value) {
                 return value!.isNotEmpty ? null : "Ciudad es requerido";
               },
+            ), */
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Ciudad o municipio',
+                    style: TextStyle(fontSize: 16.0)),
+                const SizedBox(height: 5.0),
+                SearchField<Municipios>(
+                  suggestions: pqrsfProvider.cityItems
+                      .map((e) => SearchFieldListItem<Municipios>(
+                          e.municipioDepartamento,
+                          item: e))
+                      .toList(),
+                  suggestionState: Suggestion.hidden,
+                  hasOverlay: true,
+                  searchInputDecoration: InputDecorations.authDecoration(
+                    hintText: 'Seleccione...',
+                  ),
+                  maxSuggestionsInViewPort: 5,
+                  itemHeight: 40,
+                  onSuggestionTap: (x) {
+                    pqrsfProvider.city = x.item!.municipioId;
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                  validator: (value) {
+                    return value!.isNotEmpty ? null : "Ciudad es requerido";
+                  },
+                ),
+              ],
             ),
+            const SizedBox(height: 15.0),
             LabeledWidget(
               'Dirección de residencia',
               hintText: 'Digite su dirección',
               initialValue: pqrsfProvider.address,
               onChanged: (value) => pqrsfProvider.address = value,
               validator: (value) {
-                return value!.length > 1 && value.length < 25
-                    ? null
-                    : 'Formato de dirección inválido';
+                return pqrsfProvider.medium == 'F' && value!.isEmpty
+                    ? "Ingresa una dirección, el medio de respuesta es físico"
+                    : null;
               },
             ),
             LabeledSelect(
@@ -160,7 +194,13 @@ class UserIdentifiedSection extends StatelessWidget {
               dropdownItems: pqrsfProvider.agencyItems,
               selected: pqrsfProvider.agency,
               onChanged: (value) {
+                pqrsfProvider.agency = value!;
                 FocusScope.of(context).requestFocus(FocusNode());
+              },
+              validator: (value) {
+                return value!.isEmpty && pqrsfProvider.asociated == "1"
+                    ? "Si eres asociado selecciona una agencia"
+                    : null;
               },
             ),
             SizedBox(
@@ -207,7 +247,7 @@ class UserIdentifiedSection extends StatelessWidget {
               },
             ),
             LabeledSelect(
-              data: 'Medio',
+              data: 'Medio de respuesta',
               hintText: 'Seleccione...',
               dropdownItems: pqrsfProvider.mediumItems,
               selected: pqrsfProvider.medium,

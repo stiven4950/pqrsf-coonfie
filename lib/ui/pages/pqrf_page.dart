@@ -97,7 +97,7 @@ class PqrfPage extends StatelessWidget {
                                 icon: Icons.send,
                                 onPressed: () {
                                   pqrsfProvider.validateForm();
-                                  // _display(context);
+                                  _display(context);
                                   pqrsfProvider.sendData();
                                 },
                               ),

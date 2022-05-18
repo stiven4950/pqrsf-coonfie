@@ -17,7 +17,7 @@ class HeaderWidget extends StatelessWidget {
         children: [
           Image.asset(
             "assets/data/images/logo.png",
-            height: size.width < 700 ? 35 : 60,
+            height: size.width < 700 ? 40 : 60,
           ),
           FittedBox(
             child: Text(

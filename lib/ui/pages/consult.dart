@@ -49,9 +49,11 @@ class Consult extends StatelessWidget {
               initialValue: pqrsfProvider.documentNumber,
               onChanged: (value) => pqrsfProvider.documentNumber = value,
               validator: (value) {
+                if (value!.isEmpty) {
+                  return "N° de documento es requerido";
+                }
                 RegExp regExp = RegExp(pqrsfProvider.regExpDocumentType);
-
-                return regExp.hasMatch(value ?? '')
+                return regExp.hasMatch(value)
                     ? null
                     : 'Formato de documento inválido';
               },
@@ -62,12 +64,15 @@ class Consult extends StatelessWidget {
               initialValue: pqrsfProvider.filingNumber,
               onChanged: (value) => pqrsfProvider.filingNumber = value,
               validator: (value) {
+                if (value!.isEmpty) {
+                  return "Número de radicado es requerido";
+                }
                 String pattern = r'^([a-zA-Z]{3}-\d{6}-[a-zA-Z0-9]{6})$';
                 RegExp regExp = RegExp(pattern);
 
-                return regExp.hasMatch(value ?? '')
+                return regExp.hasMatch(value)
                     ? null
-                    : 'Formato de número inválido';
+                    : 'Formato de número inválido. Digita los guiones';
               },
             ),
             const SizedBox(height: 20),
@@ -114,21 +119,21 @@ class Consult extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            const LabeledWidgetReadonly(
+            LabeledWidgetReadonly(
               "Número de radicado",
-              "CGK-754875-1AY589",
+              pqrsfProvider.filingNumberAnswer,
             ),
-            const LabeledWidgetReadonly(
+            LabeledWidgetReadonly(
               "Nombre del usuario",
-              "Omar Stiven Rivera Rocha",
+              pqrsfProvider.fullnameAnswer,
             ),
-            const LabeledWidgetReadonly(
+            LabeledWidgetReadonly(
               "Número de documento",
-              "1083931052",
+              pqrsfProvider.documentNumberAnswer,
             ),
-            const LabeledWidgetReadonly(
+            LabeledWidgetReadonly(
               "Tipo de solicitud",
-              "Queja",
+              pqrsfProvider.typeRequestAnswer,
             ),
           ],
         ),
@@ -143,17 +148,17 @@ class Consult extends StatelessWidget {
               ),
               visible: !(size.width < 700),
             ),
-            const LabeledWidgetReadonly(
+            LabeledWidgetReadonly(
               "Fecha de radicación",
-              "12/03/2022",
+              pqrsfProvider.filingDateAnswer,
             ),
-            const LabeledWidgetReadonly(
+            LabeledWidgetReadonly(
               "Estado de trámite",
-              "Resuelto",
+              pqrsfProvider.proccessStateAnswer,
             ),
-            const LabeledWidgetReadonly(
+            LabeledWidgetReadonly(
               "Fecha de respuesta",
-              "04/05/2022",
+              pqrsfProvider.dateAnswer,
             ),
             Visibility(
               child: const SizedBox(

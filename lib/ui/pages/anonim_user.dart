@@ -70,6 +70,7 @@ class AnonimUser extends StatelessWidget {
           children: [
             LabeledWidget(
               'Descripción',
+              key: const ValueKey('Descripcion'),
               hintText: 'Describa su solicitud',
               initialValue: pqrsfProvider.description,
               onChanged: (value) => pqrsfProvider.description = value,
