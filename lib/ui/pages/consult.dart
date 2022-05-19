@@ -14,7 +14,13 @@ class Consult extends StatelessWidget {
 
     final List<Widget> children = [
       SizedBox(
-        width: size.width < 700 ? size.width * .9 : size.width * (1 / 4),
+        width: ResponsiveWidget.widthInScreen(
+          context,
+          size.width * .9,
+          size.width * .3,
+          size.width * (1 / 4),
+          size.width * (1 / 4),
+        ),
         child: Column(
           children: [
             const Text(
@@ -87,7 +93,13 @@ class Consult extends StatelessWidget {
         ),
       ),
       SizedBox(
-        width: size.width < 700 ? size.width * .9 : size.width * (1 / 4),
+        width: ResponsiveWidget.widthInScreen(
+          context,
+          size.width * .9,
+          size.width * .3,
+          size.width * (1 / 4),
+          size.width * (1 / 4),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -139,7 +151,13 @@ class Consult extends StatelessWidget {
         ),
       ),
       SizedBox(
-        width: size.width < 700 ? size.width * .9 : size.width * (1 / 4),
+        width: ResponsiveWidget.widthInScreen(
+          context,
+          size.width * .9,
+          size.width * .3,
+          size.width * (1 / 4),
+          size.width * (1 / 4),
+        ),
         child: Column(
           children: [
             Visibility(

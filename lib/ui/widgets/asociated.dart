@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
+import 'package:pqrf_coonfie/ui/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class Asociated extends StatelessWidget {
@@ -15,12 +16,25 @@ class Asociated extends StatelessWidget {
         ...pqrsfProvider.asociatedValues.map(
           (c) {
             return SizedBox(
-              width: 96,
+              width: ResponsiveWidget.widthInScreen(
+                context,
+                70,
+                70,
+                80,
+                96,
+              ),
               child: RadioListTile<String>(
                 controlAffinity: ListTileControlAffinity.trailing,
                 title: Text(
                   c.key,
-                  style: TextStyle(fontSize: size.width < 700 ? 9 : 12),
+                  style: TextStyle(
+                      fontSize: ResponsiveWidget.widthInScreen(
+                    context,
+                    7,
+                    7,
+                    10,
+                    12,
+                  )),
                 ),
                 groupValue: pqrsfProvider.asociated,
                 value: c.value,

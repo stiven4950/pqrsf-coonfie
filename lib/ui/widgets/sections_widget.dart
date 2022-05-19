@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pqrf_coonfie/ui/widgets/responsive.dart';
 import 'package:provider/provider.dart';
 
 import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
@@ -15,7 +16,13 @@ class SectionsPQRSF extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 10.0, bottom: 20.0),
       padding: const EdgeInsets.all(30.0),
-      width: size.width < 700 ? size.width : size.width * .9,
+      width: ResponsiveWidget.widthInScreen(
+        context,
+        size.width,
+        size.width,
+        size.width * .95,
+        size.width * .9,
+      ),
       constraints: const BoxConstraints(minHeight: 400.0),
       decoration: BoxDecoration(
         color: Colors.white,

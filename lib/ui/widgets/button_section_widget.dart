@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pqrf_coonfie/providers/menu_section.dart';
+import 'package:pqrf_coonfie/ui/widgets/responsive.dart';
 import 'package:provider/provider.dart';
 
 class ButtonSectionWidget extends StatelessWidget {
@@ -24,7 +25,13 @@ class ButtonSectionWidget extends StatelessWidget {
         child: FittedBox(
           child: Text(
             title,
-            style: TextStyle(fontSize: size.width < 700 ? 16 : 24),
+            style: TextStyle(
+              fontSize: ResponsiveWidget.isExtraSmallScreen(context)
+                  ? 16
+                  : ResponsiveWidget.isMediumScreen(context)
+                      ? 18
+                      : 20,
+            ),
           ),
         ),
         style: ButtonStyle(
@@ -33,7 +40,9 @@ class ButtonSectionWidget extends StatelessWidget {
           ),
           minimumSize: MaterialStateProperty.resolveWith(
             (states) => Size(
-                size.width < 700 ? size.width : size.width * (1 / 3.8), 36),
+                ResponsiveWidget.widthInScreen(context, size.width, size.width,
+                    size.width * .25, size.width * 0.25),
+                36),
           ),
           shape: MaterialStateProperty.resolveWith(
             (states) => const RoundedRectangleBorder(

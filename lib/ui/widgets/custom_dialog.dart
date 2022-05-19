@@ -9,7 +9,8 @@ class CustomDialog extends StatelessWidget {
   final Widget widget;
   final Function action;
 
-  CustomDialog({
+  const CustomDialog({
+    Key? key,
     required this.title,
     required this.description,
     required this.buttonText,
@@ -17,7 +18,7 @@ class CustomDialog extends StatelessWidget {
     required this.icon,
     required this.widget,
     required this.action,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

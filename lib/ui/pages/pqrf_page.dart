@@ -39,18 +39,30 @@ class PqrfPage extends StatelessWidget {
             const HeaderWidget(),
             SingleChildScrollView(
               padding: EdgeInsets.symmetric(
-                  horizontal: size.width < 700 ? 25 : 100.0,
-                  vertical: size.width < 700 ? 18 : 50.0),
+                horizontal:
+                    ResponsiveWidget.widthInScreen(context, 25, 25, 30, 100),
+                vertical:
+                    ResponsiveWidget.widthInScreen(context, 18, 18, 30, 50),
+              ),
               child: Column(
                 children: [
-                  size.width < 700
-                      ? Column(
-                          children: childrenButtonSection,
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: childrenButtonSection,
-                        ),
+                  ResponsiveWidget(
+                    largeScreen: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: childrenButtonSection,
+                    ),
+                    mediumScreen: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: childrenButtonSection,
+                    ),
+                    smallScreen: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: childrenButtonSection,
+                    ),
+                    extraSmallScreen: Column(
+                      children: childrenButtonSection,
+                    ),
+                  ),
 
                   // -------------------------------------------------------------
                   Visibility(
@@ -70,7 +82,8 @@ class PqrfPage extends StatelessWidget {
                     visible: !(menuSection.menu == 3),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: size.width < 700
+                      children: ResponsiveWidget.isExtraSmallScreen(context) ||
+                              ResponsiveWidget.isSmallScreen(context)
                           ? [
                               CircularButton(
                                 tooltip: 'Adjuntar archivos',

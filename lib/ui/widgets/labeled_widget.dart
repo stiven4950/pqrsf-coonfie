@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pqrf_coonfie/ui/decorations/input_decorations.dart';
-import 'package:searchfield/searchfield.dart';
 
 class LabeledWidget extends StatelessWidget {
   final String data;
@@ -126,7 +125,7 @@ class LabeledWidgetReadonly extends StatelessWidget {
           Text(label, style: const TextStyle(fontSize: 16.0)),
           const SizedBox(height: 5.0),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,

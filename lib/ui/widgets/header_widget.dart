@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pqrf_coonfie/ui/widgets/responsive.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({Key? key}) : super(key: key);
@@ -10,25 +11,26 @@ class HeaderWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: size.width < 700 ? 10 : 40.0),
       width: double.infinity,
-      height: 100,
+      height: 90,
       decoration: const BoxDecoration(color: Color(0xFF4054B2)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
             "assets/data/images/logo.png",
-            height: size.width < 700 ? 40 : 60,
+            height: ResponsiveWidget.isExtraSmallScreen(context) ? 38 : 50,
           ),
           FittedBox(
             child: Text(
               "PQRSF Coonfie",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: size.width < 700 ? 16 : 20,
+                fontSize:
+                    ResponsiveWidget.widthInScreen(context, 14, 14, 16, 16),
               ),
             ),
           ),
-          size.width < 700
+          ResponsiveWidget.isExtraSmallScreen(context)
               ? IconButton(
                   onPressed: () {},
                   icon: const Icon(
@@ -42,7 +44,7 @@ class HeaderWidget extends StatelessWidget {
                       Icon(Icons.arrow_back_ios),
                       Text(
                         "Regresar",
-                        style: TextStyle(color: Colors.white, fontSize: 24.0),
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       )
                     ],
                   ),

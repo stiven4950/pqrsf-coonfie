@@ -1,3 +1,4 @@
+export 'package:pqrf_coonfie/ui/widgets/responsive.dart';
 export 'package:pqrf_coonfie/ui/widgets/asociated.dart';
 export 'package:pqrf_coonfie/ui/widgets/button_section_widget.dart';
 export 'package:pqrf_coonfie/ui/widgets/circular_button_widget.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pqrf_coonfie/ui/decorations/theme_light.dart';
 import 'package:provider/provider.dart';
 
 import 'package:pqrf_coonfie/ui/pages/pqrf_page.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'PQRSF | Coonfie',
         home: const PqrfPage(),
-        theme: ThemeData(fontFamily: "Poppins"),
+        theme: lightThemeData,
       ),
     );
   }
