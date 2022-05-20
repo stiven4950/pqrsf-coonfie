@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pqrf_coonfie/ui/widgets/responsive.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pqrf_coonfie/providers/pqrf_provider.dart';
+import 'package:pqrf_coonfie/providers/providers.dart';
 
 class SectionsPQRSF extends StatelessWidget {
   final List<Widget> children;
@@ -12,6 +12,7 @@ class SectionsPQRSF extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final pqrsfProvider = Provider.of<PQRSFProvider>(context);
+    final menuSection = Provider.of<MenuSection>(context);
 
     return Container(
       margin: const EdgeInsets.only(top: 10.0, bottom: 20.0),
@@ -35,7 +36,10 @@ class SectionsPQRSF extends StatelessWidget {
         child: size.width < 700
             ? Column(children: children)
             : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment:
+                    !pqrsfProvider.thereIsAnswer && menuSection.menu == 3
+                        ? MainAxisAlignment.center
+                        : MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: children,
               ),

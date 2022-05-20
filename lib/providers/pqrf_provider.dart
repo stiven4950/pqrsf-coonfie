@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pqrf_coonfie/models/agency_model.dart';
@@ -193,7 +196,7 @@ class PQRSFProvider extends ChangeNotifier {
   String _filingNumber = '';
 
   // Upload variable
-  FilePickerResult? result;
+  FilePickerResult? picker;
   // ---------------------------------------------------------------------------
   // Validaciones del formulario
 
@@ -328,9 +331,6 @@ class PQRSFProvider extends ChangeNotifier {
   String get filingNumber => _filingNumber;
   String get asociated => _asociated;
 
-  // Process Data
-  void sendData() {}
-
   // RESPUESTA
   String filingNumberAnswer = 'CGK-754875-1AY589';
   String fullnameAnswer = 'OMAR STIVEN RIVERA CALDERÓN';
@@ -339,4 +339,85 @@ class PQRSFProvider extends ChangeNotifier {
   String filingDateAnswer = '12/03/2022';
   String proccessStateAnswer = 'RESUELTO';
   String dateAnswer = '04/05/2022';
+
+  bool _thereIsAnswer = false;
+  set thereIsAnswer(bool value) {
+    _thereIsAnswer = value;
+    notifyListeners();
+  }
+
+  bool get thereIsAnswer => _thereIsAnswer;
+
+  // Process Data
+  Future<bool> sendData(int menu) async {
+    final uri = Uri.http('data.com', 'send/user');
+    final request = http.MultipartRequest('POST', uri);
+    // request.headers['authorization'] = 'Token ';
+
+    if (menu != 3) {
+      if (picker != null) {
+        int i = 0;
+        picker!.files.forEach((element) async {
+          Uint8List fileBytes = element.bytes!;
+          String fileName = element.name;
+
+          final file =
+              http.MultipartFile.fromBytes('file$i$fileName', fileBytes);
+          request.files.add(file);
+          i++;
+        });
+      }
+      if (menu == 1) {
+        request.fields['documentType'] = documentType;
+        request.fields['documentNumber'] = documentNumber;
+        request.fields['fullName'] = fullName;
+        request.fields['telephone'] = telephone;
+        request.fields['phone'] = phone;
+        request.fields['email'] = email;
+        request.fields['city'] = city;
+        request.fields['address'] = address;
+        request.fields['agency'] = agency;
+        request.fields['asociated'] = asociated;
+        request.fields['typeRequest'] = typeRequest;
+        request.fields['matter'] = matter;
+        request.fields['medium'] = medium;
+        request.fields['description'] = description;
+      } else {
+        request.fields['fullName'] = fullName;
+        request.fields['typeRequest'] = typeRequest;
+        request.fields['matter'] = matter;
+        request.fields['description'] = description;
+      }
+
+      // Makes send
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+    } else {
+      final uri = Uri.http('data.com', 'consult/state', {
+        'documentType': _documentType,
+        'documentNumber': _documentNumber,
+        'typeRequest': _typeRequest,
+        'matter': _matter,
+      });
+      final response = await http.get(uri);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+
+        filingNumber = data['filingNumber'];
+        fullnameAnswer = data['fullnameAnswer'];
+        documentNumberAnswer = data['documentNumberAnswer'];
+        typeRequestAnswer = data['typeRequestAnswer'];
+        filingDateAnswer = data['filingDateAnswer'];
+        proccessStateAnswer = data['proccessStateAnswer'];
+        dateAnswer = data['dateAnswer'];
+
+        notifyListeners();
+      } else {
+        print("Error has ocurred");
+      }
+    }
+
+    return true;
+  }
 }

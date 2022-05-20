@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +18,7 @@ class Consult extends StatelessWidget {
         width: ResponsiveWidget.widthInScreen(
           context,
           size.width * .9,
-          size.width * .3,
+          size.width * .25,
           size.width * (1 / 4),
           size.width * (1 / 4),
         ),
@@ -87,109 +88,124 @@ class Consult extends StatelessWidget {
               icon: Icons.manage_search_rounded,
               onPressed: () {
                 pqrsfProvider.validateForm();
+                pqrsfProvider.thereIsAnswer = true;
               },
             ),
           ],
         ),
       ),
-      SizedBox(
-        width: ResponsiveWidget.widthInScreen(
-          context,
-          size.width * .9,
-          size.width * .3,
-          size.width * (1 / 4),
-          size.width * (1 / 4),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Visibility(
-              child: const SizedBox(
-                height: 50,
-                child: Divider(
-                  color: Colors.indigo,
-                ),
-              ),
-              visible: size.width < 700,
+      Visibility(
+        visible: pqrsfProvider.thereIsAnswer,
+        child: FadeInUp(
+          child: SizedBox(
+            width: ResponsiveWidget.widthInScreen(
+              context,
+              size.width * .9,
+              size.width * .25,
+              size.width * (1 / 4),
+              size.width * (1 / 4),
             ),
-            Row(
-              mainAxisAlignment: size.width < 700
-                  ? MainAxisAlignment.center
-                  : MainAxisAlignment.start,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.asset(
-                  "assets/data/images/result.jpg",
-                  height: 80.0,
-                ),
-                const Text(
-                  "Respuesta",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+                Visibility(
+                  child: const SizedBox(
+                    height: 50,
+                    child: Divider(
+                      color: Colors.indigo,
+                    ),
                   ),
+                  visible: size.width < 700,
+                ),
+                Row(
+                  mainAxisAlignment: size.width < 700
+                      ? MainAxisAlignment.center
+                      : MainAxisAlignment.start,
+                  children: [
+                    BounceInLeft(
+                      child: Image.asset(
+                        "assets/data/images/result.jpg",
+                        height: 80.0,
+                      ),
+                    ),
+                    FadeIn(
+                      child: const Text(
+                        "Respuesta",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                LabeledWidgetReadonly(
+                  "Número de radicado",
+                  pqrsfProvider.filingNumberAnswer,
+                ),
+                LabeledWidgetReadonly(
+                  "Nombre del usuario",
+                  pqrsfProvider.fullnameAnswer,
+                ),
+                LabeledWidgetReadonly(
+                  "Número de documento",
+                  pqrsfProvider.documentNumberAnswer,
+                ),
+                LabeledWidgetReadonly(
+                  "Tipo de solicitud",
+                  pqrsfProvider.typeRequestAnswer,
                 ),
               ],
             ),
-            const SizedBox(height: 10),
-            LabeledWidgetReadonly(
-              "Número de radicado",
-              pqrsfProvider.filingNumberAnswer,
-            ),
-            LabeledWidgetReadonly(
-              "Nombre del usuario",
-              pqrsfProvider.fullnameAnswer,
-            ),
-            LabeledWidgetReadonly(
-              "Número de documento",
-              pqrsfProvider.documentNumberAnswer,
-            ),
-            LabeledWidgetReadonly(
-              "Tipo de solicitud",
-              pqrsfProvider.typeRequestAnswer,
-            ),
-          ],
+          ),
         ),
       ),
-      SizedBox(
-        width: ResponsiveWidget.widthInScreen(
-          context,
-          size.width * .9,
-          size.width * .3,
-          size.width * (1 / 4),
-          size.width * (1 / 4),
-        ),
-        child: Column(
-          children: [
-            Visibility(
-              child: const SizedBox(
-                height: 90,
-              ),
-              visible: !(size.width < 700),
+      Visibility(
+        visible: pqrsfProvider.thereIsAnswer,
+        child: FadeInUp(
+          child: SizedBox(
+            width: ResponsiveWidget.widthInScreen(
+              context,
+              size.width * .9,
+              size.width * .25,
+              size.width * (1 / 4),
+              size.width * (1 / 4),
             ),
-            LabeledWidgetReadonly(
-              "Fecha de radicación",
-              pqrsfProvider.filingDateAnswer,
+            child: Column(
+              children: [
+                Visibility(
+                  child: const SizedBox(
+                    height: 90,
+                  ),
+                  visible: !(size.width < 700),
+                ),
+                LabeledWidgetReadonly(
+                  "Fecha de radicación",
+                  pqrsfProvider.filingDateAnswer,
+                ),
+                LabeledWidgetReadonly(
+                  "Estado de trámite",
+                  pqrsfProvider.proccessStateAnswer,
+                ),
+                LabeledWidgetReadonly(
+                  "Fecha de respuesta",
+                  pqrsfProvider.dateAnswer,
+                ),
+                Visibility(
+                  child: const SizedBox(
+                    height: 30,
+                  ),
+                  visible: !(size.width < 700),
+                ),
+                GradientButtonExtended(
+                  text: "Imprimir",
+                  icon: Icons.print_rounded,
+                  onPressed: () {},
+                ),
+              ],
             ),
-            LabeledWidgetReadonly(
-              "Estado de trámite",
-              pqrsfProvider.proccessStateAnswer,
-            ),
-            LabeledWidgetReadonly(
-              "Fecha de respuesta",
-              pqrsfProvider.dateAnswer,
-            ),
-            Visibility(
-              child: const SizedBox(
-                height: 30,
-              ),
-              visible: !(size.width < 700),
-            ),
-            GradientButtonExtended(
-              text: "Imprimir",
-              icon: Icons.print_rounded,
-              onPressed: () {},
-            ),
-          ],
+          ),
         ),
       ),
     ];

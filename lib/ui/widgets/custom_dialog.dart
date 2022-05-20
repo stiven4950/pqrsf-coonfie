@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:pqrf_coonfie/ui/widgets/gradient_button_extended.dart';
+import 'package:pqrf_coonfie/ui/widgets/responsive.dart';
 
 class CustomDialog extends StatelessWidget {
   final String title, description, buttonText;
@@ -46,7 +47,8 @@ class CustomDialog extends StatelessWidget {
               right: Consts.padding,
             ),
             margin: const EdgeInsets.only(top: Consts.avatarRadius),
-            width: size.width < 700 ? size.width * .9 : size.width * .3,
+            width: ResponsiveWidget.widthInScreen(context, size.width * .9,
+                size.width * .7, size.width * .6, size.width * .3),
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.rectangle,

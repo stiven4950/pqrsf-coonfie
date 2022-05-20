@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -66,15 +67,15 @@ class PqrfPage extends StatelessWidget {
 
                   // -------------------------------------------------------------
                   Visibility(
-                    child: const UserIdentifiedSection(),
+                    child: FadeInLeft(child: const UserIdentifiedSection()),
                     visible: menuSection.menu == 1,
                   ),
                   Visibility(
-                    child: const AnonimUser(),
+                    child: FadeInLeft(child: const AnonimUser()),
                     visible: menuSection.menu == 2,
                   ),
                   Visibility(
-                    child: const Consult(),
+                    child: FadeInLeft(child: const Consult()),
                     visible: menuSection.menu == 3,
                   ),
                   // -------------------------------------------------------------
@@ -111,7 +112,9 @@ class PqrfPage extends StatelessWidget {
                                 onPressed: () {
                                   pqrsfProvider.validateForm();
                                   _display(context);
-                                  pqrsfProvider.sendData();
+                                  pqrsfProvider.isValidForm()
+                                      ? pqrsfProvider.sendData(menuSection.menu)
+                                      : print("Paila");
                                 },
                               ),
                             ],

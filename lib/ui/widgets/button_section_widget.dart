@@ -40,8 +40,8 @@ class ButtonSectionWidget extends StatelessWidget {
           ),
           minimumSize: MaterialStateProperty.resolveWith(
             (states) => Size(
-                ResponsiveWidget.widthInScreen(context, size.width, size.width,
-                    size.width * .25, size.width * 0.25),
+                ResponsiveWidget.widthInScreen(context, size.width,
+                    size.width * .25, size.width * .25, size.width * 0.25),
                 36),
           ),
           shape: MaterialStateProperty.resolveWith(

@@ -20,7 +20,7 @@ class UserIdentifiedSection extends StatelessWidget {
         width: ResponsiveWidget.widthInScreen(
           context,
           size.width * .9,
-          size.width * .3,
+          size.width * .25,
           size.width * (1 / 4),
           size.width * (1 / 4),
         ),
@@ -119,7 +119,7 @@ class UserIdentifiedSection extends StatelessWidget {
         width: ResponsiveWidget.widthInScreen(
           context,
           size.width * .9,
-          size.width * .3,
+          size.width * .25,
           size.width * (1 / 4),
           size.width * (1 / 4),
         ),
@@ -231,7 +231,7 @@ class UserIdentifiedSection extends StatelessWidget {
         width: ResponsiveWidget.widthInScreen(
           context,
           size.width * .9,
-          size.width * .3,
+          size.width * .25,
           size.width * (1 / 4),
           size.width * (1 / 4),
         ),
