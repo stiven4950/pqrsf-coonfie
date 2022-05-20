@@ -34,7 +34,7 @@ dependencies:
   animate_do: ^2.1.0
   http: ^0.13.3
   file_picker: ^4.5.1
-  searchfield: ^0.6.4
+  searchfield: ^0.6.5
 
 dev_dependencies:
   flutter_test:
