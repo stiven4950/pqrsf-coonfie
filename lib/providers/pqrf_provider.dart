@@ -33,15 +33,6 @@ class PQRSFProvider extends ChangeNotifier {
     final response =
         await _getJsonData("PQRSF_back/serviciosparametria/traermunicipios");
 
-    /* final List<DropdownMenuItem<String>> data = municipiosFromJson(response)
-        .map(
-          (e) => DropdownMenuItem<String>(
-            value: e.municipioId,
-            child: Text(e.municipioDepartamento),
-          ),
-        )
-        .toList(); */
-
     cityItems.addAll(municipiosFromJson(response));
     notifyListeners();
   }
@@ -82,7 +73,7 @@ class PQRSFProvider extends ChangeNotifier {
     matterItems = [
       const DropdownMenuItem<String>(
         value: '',
-        child: Text('Seleccione'),
+        child: Text('Seleccione...'),
       ),
     ];
     matterItems.addAll(data);
@@ -109,14 +100,6 @@ class PQRSFProvider extends ChangeNotifier {
       )
       .toList();
 
-  // City
-  /* List<DropdownMenuItem<String>> cityItems = [
-    const DropdownMenuItem<String>(
-      value: '',
-      child: Text('Seleccione'),
-    ),
-  ]; */
-
   List<Municipios> cityItems = [];
 
   // Asociated
@@ -126,11 +109,10 @@ class PQRSFProvider extends ChangeNotifier {
   ];
 
   // Agency
-
   final List<DropdownMenuItem<String>> agencyItems = [
     const DropdownMenuItem<String>(
       value: '',
-      child: Text('Seleccione'),
+      child: Text('Seleccione...'),
     ),
   ];
 
@@ -154,11 +136,10 @@ class PQRSFProvider extends ChangeNotifier {
       .toList();
 
   // Matter
-
   List<DropdownMenuItem<String>> matterItems = [
     const DropdownMenuItem<String>(
       value: '',
-      child: Text('Seleccione'),
+      child: Text('Seleccione...'),
     ),
   ];
 
@@ -368,9 +349,9 @@ class PQRSFProvider extends ChangeNotifier {
         });
       }
       if (menu == 1) {
-        request.fields['documentType'] = documentType;
-        request.fields['documentNumber'] = documentNumber;
-        request.fields['fullName'] = fullName;
+        request.fields['document_type'] = documentType;
+        request.fields['document_number'] = documentNumber;
+        request.fields['fullname'] = fullName;
         request.fields['telephone'] = telephone;
         request.fields['phone'] = phone;
         request.fields['email'] = email;
@@ -378,15 +359,17 @@ class PQRSFProvider extends ChangeNotifier {
         request.fields['address'] = address;
         request.fields['agency'] = agency;
         request.fields['asociated'] = asociated;
-        request.fields['typeRequest'] = typeRequest;
+        request.fields['type_request'] = typeRequest;
         request.fields['matter'] = matter;
         request.fields['medium'] = medium;
         request.fields['description'] = description;
+        request.fields['user_type'] = '1';
       } else {
-        request.fields['fullName'] = fullName;
-        request.fields['typeRequest'] = typeRequest;
+        request.fields['fullname'] = fullName;
+        request.fields['type_request'] = typeRequest;
         request.fields['matter'] = matter;
         request.fields['description'] = description;
+        request.fields['user_type'] = '0';
       }
 
       // Makes send
@@ -394,23 +377,23 @@ class PQRSFProvider extends ChangeNotifier {
       final response = await http.Response.fromStream(streamedResponse);
     } else {
       final uri = Uri.http('data.com', 'consult/state', {
-        'documentType': _documentType,
-        'documentNumber': _documentNumber,
-        'typeRequest': _typeRequest,
-        'matter': _matter,
+        'document_type': documentType,
+        'document_number': documentNumber,
+        'type_request': typeRequest,
+        'matter': matter,
       });
       final response = await http.get(uri);
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
 
-        filingNumber = data['filingNumber'];
-        fullnameAnswer = data['fullnameAnswer'];
-        documentNumberAnswer = data['documentNumberAnswer'];
-        typeRequestAnswer = data['typeRequestAnswer'];
-        filingDateAnswer = data['filingDateAnswer'];
-        proccessStateAnswer = data['proccessStateAnswer'];
-        dateAnswer = data['dateAnswer'];
+        filingNumber = data['filing_number'];
+        fullnameAnswer = data['fullname'];
+        documentNumberAnswer = data['document_number'];
+        typeRequestAnswer = data['type_request'];
+        filingDateAnswer = data['filing_date'];
+        proccessStateAnswer = data['proccess_state'];
+        dateAnswer = data['date_answer'];
 
         notifyListeners();
       } else {

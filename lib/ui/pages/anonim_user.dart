@@ -22,24 +22,23 @@ class AnonimUser extends StatelessWidget {
           size.width * (1 / 4),
         ),
         child: Column(
-          children: [
-            LabeledWidget(
-              'Nombre y apellidos o razón social',
-              hintText: 'Digite su nombre',
-              initialValue: pqrsfProvider.fullName,
-              onChanged: (value) => pqrsfProvider.fullName = value,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return null;
-                }
-                String pattern = r'^([a-zA-ZÀ-ÿ\u00f1\u00d1\s]{5,50})$';
-                RegExp regExp = RegExp(pattern);
-
-                return regExp.hasMatch(value)
-                    ? null
-                    : 'Formato de nombre inválido';
-              },
+          children: const [
+            SizedBox(
+              child: Text("Aquí va la leyenda"),
             ),
+          ],
+        ),
+      ),
+      SizedBox(
+        width: ResponsiveWidget.widthInScreen(
+          context,
+          size.width * .9,
+          size.width * .3,
+          size.width * (1 / 4),
+          size.width * (1 / 4),
+        ),
+        child: Column(
+          children: [
             LabeledSelect(
               data: 'Tipo de petición',
               hintText: 'Seleccione...',
@@ -91,7 +90,7 @@ class AnonimUser extends StatelessWidget {
                     ? null
                     : 'Descripción es requerido';
               },
-              maxLines: 6,
+              maxLines: 10,
             ),
           ],
         ),

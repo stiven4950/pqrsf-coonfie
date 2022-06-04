@@ -14,13 +14,12 @@ class PqrfPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final pqrsfProvider = Provider.of<PQRSFProvider>(context);
     final menuSection = Provider.of<MenuSection>(context);
 
     const List<Widget> childrenButtonSection = [
       ButtonSectionWidget(
-        title: "Usuario identificado",
+        title: "Usuario Identificado",
         order: 1,
       ),
       ButtonSectionWidget(

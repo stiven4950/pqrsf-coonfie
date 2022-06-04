@@ -35,36 +35,6 @@ class Consult extends StatelessWidget {
               "Por favor seleccione el tipo de documento, registre el número de documento y el número de radicación.",
             ),
             const SizedBox(height: 10),
-            LabeledSelect(
-              data: "Tipo de documento",
-              hintText: 'Seleccione...',
-              dropdownItems: pqrsfProvider.documentTypeItems,
-              selected: pqrsfProvider.documentType,
-              onChanged: (value) {
-                pqrsfProvider.documentType = value!;
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
-              validator: (value) {
-                return value!.isNotEmpty
-                    ? null
-                    : "Tipo de documento es requerido";
-              },
-            ),
-            LabeledWidget(
-              'N° de documento',
-              hintText: 'Digite su número de documento',
-              initialValue: pqrsfProvider.documentNumber,
-              onChanged: (value) => pqrsfProvider.documentNumber = value,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "N° de documento es requerido";
-                }
-                RegExp regExp = RegExp(pqrsfProvider.regExpDocumentType);
-                return regExp.hasMatch(value)
-                    ? null
-                    : 'Formato de documento inválido';
-              },
-            ),
             LabeledWidget(
               'N° de radicado',
               hintText: 'Digite el número de radicado',

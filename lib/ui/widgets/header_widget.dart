@@ -22,7 +22,7 @@ class HeaderWidget extends StatelessWidget {
           ),
           FittedBox(
             child: Text(
-              "PQRSF Coonfie",
+              "Sistema PQRSF",
               style: TextStyle(
                 color: Colors.white,
                 fontSize:

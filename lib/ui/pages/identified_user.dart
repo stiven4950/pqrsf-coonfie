@@ -26,21 +26,6 @@ class UserIdentifiedSection extends StatelessWidget {
         ),
         child: Column(
           children: [
-            LabeledSelect(
-              data: "Tipo de documento",
-              hintText: 'Seleccione...',
-              dropdownItems: pqrsfProvider.documentTypeItems,
-              selected: pqrsfProvider.documentType,
-              onChanged: (value) {
-                pqrsfProvider.documentType = value!;
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
-              validator: (value) {
-                return value!.isNotEmpty
-                    ? null
-                    : "Tipo de documento es requerido";
-              },
-            ),
             LabeledWidget(
               'N° de documento',
               hintText: 'Digite su número de documento',
@@ -77,24 +62,6 @@ class UserIdentifiedSection extends StatelessWidget {
               },
             ),
             LabeledWidget(
-              'Teléfono',
-              hintText: 'Digite su teléfono',
-              initialValue: pqrsfProvider.telephone,
-              onChanged: (value) => pqrsfProvider.telephone = value,
-              validator: (value) {
-                String pattern = r'^(\d{10})$';
-                RegExp regExp = RegExp(pattern);
-
-                if (value!.isEmpty) {
-                  return null;
-                }
-
-                return regExp.hasMatch(value)
-                    ? null
-                    : 'Formato de teléfono inválido';
-              },
-            ),
-            LabeledWidget(
               'Celular',
               hintText: 'Digite su celular',
               initialValue: pqrsfProvider.phone,
@@ -112,20 +79,6 @@ class UserIdentifiedSection extends StatelessWidget {
                     : 'Formato de celular inválido';
               },
             ),
-          ],
-        ),
-      ),
-      SizedBox(
-        width: ResponsiveWidget.widthInScreen(
-          context,
-          size.width * .9,
-          size.width * .25,
-          size.width * (1 / 4),
-          size.width * (1 / 4),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
             LabeledWidget(
               'Correo',
               key: const ValueKey('Correo'),
@@ -146,19 +99,31 @@ class UserIdentifiedSection extends StatelessWidget {
                     : 'Formato de Email inválido';
               },
             ),
-            /* LabeledSelect(
-              data: 'Ciudad o municipio',
-              hintText: 'Seleccione...',
-              dropdownItems: pqrsfProvider.cityItems,
-              selected: pqrsfProvider.city,
-              onChanged: (value) {
-                pqrsfProvider.city = value!;
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
+          ],
+        ),
+      ),
+      SizedBox(
+        width: ResponsiveWidget.widthInScreen(
+          context,
+          size.width * .9,
+          size.width * .25,
+          size.width * (1 / 4),
+          size.width * (1 / 4),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            LabeledWidget(
+              'Dirección de residencia',
+              hintText: 'Digite su dirección',
+              initialValue: pqrsfProvider.address,
+              onChanged: (value) => pqrsfProvider.address = value,
               validator: (value) {
-                return value!.isNotEmpty ? null : "Ciudad es requerido";
+                return pqrsfProvider.medium == 'F' && value!.isEmpty
+                    ? "Ingresa una dirección, el medio de respuesta es físico"
+                    : null;
               },
-            ), */
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -189,54 +154,6 @@ class UserIdentifiedSection extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 15.0),
-            LabeledWidget(
-              'Dirección de residencia',
-              hintText: 'Digite su dirección',
-              initialValue: pqrsfProvider.address,
-              onChanged: (value) => pqrsfProvider.address = value,
-              validator: (value) {
-                return pqrsfProvider.medium == 'F' && value!.isEmpty
-                    ? "Ingresa una dirección, el medio de respuesta es físico"
-                    : null;
-              },
-            ),
-            LabeledSelect(
-              data: 'Agencia',
-              hintText: 'Seleccione...',
-              dropdownItems: pqrsfProvider.agencyItems,
-              selected: pqrsfProvider.agency,
-              onChanged: (value) {
-                pqrsfProvider.agency = value!;
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
-              validator: (value) {
-                return value!.isEmpty && pqrsfProvider.asociated == "1"
-                    ? "Si eres asociado selecciona una agencia"
-                    : null;
-              },
-            ),
-            SizedBox(
-              width: 300.0,
-              child: Row(
-                children: const [
-                  Text('Asociado', style: TextStyle(fontSize: 16.0)),
-                  Asociated(),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-      SizedBox(
-        width: ResponsiveWidget.widthInScreen(
-          context,
-          size.width * .9,
-          size.width * .25,
-          size.width * (1 / 4),
-          size.width * (1 / 4),
-        ),
-        child: Column(
-          children: [
             LabeledSelect(
               data: 'Tipo de petición',
               hintText: 'Seleccione...',
@@ -264,6 +181,19 @@ class UserIdentifiedSection extends StatelessWidget {
                 return value!.isNotEmpty ? null : "Asunto requerido";
               },
             ),
+          ],
+        ),
+      ),
+      SizedBox(
+        width: ResponsiveWidget.widthInScreen(
+          context,
+          size.width * .9,
+          size.width * .25,
+          size.width * (1 / 4),
+          size.width * (1 / 4),
+        ),
+        child: Column(
+          children: [
             LabeledSelect(
               data: 'Medio de respuesta',
               hintText: 'Seleccione...',
@@ -287,7 +217,7 @@ class UserIdentifiedSection extends StatelessWidget {
                     ? null
                     : 'Descripción es requerido';
               },
-              maxLines: 6,
+              maxLines: 10,
             ),
           ],
         ),
