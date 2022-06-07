@@ -22,12 +22,21 @@ class LabeledWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 15.0),
+      margin: const EdgeInsets.only(bottom: 13.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(data, style: const TextStyle(fontSize: 16.0)),
-          const SizedBox(height: 5.0),
+          Row(children: [
+            Text(data, style: const TextStyle(fontSize: 13.0)),
+            const Text(
+              '*',
+              style: TextStyle(
+                fontSize: 13.0,
+                color: Colors.indigo,
+              ),
+            ),
+          ]),
+          const SizedBox(height: 3.0),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
             style: const TextStyle(fontSize: 14.0),
@@ -70,12 +79,23 @@ class LabeledSelect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 15.0),
+      margin: const EdgeInsets.only(bottom: 13.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(data, style: const TextStyle(fontSize: 16.0)),
-          const SizedBox(height: 5.0),
+          Row(
+            children: [
+              Text(data, style: const TextStyle(fontSize: 13.0)),
+              const Text(
+                '*',
+                style: TextStyle(
+                  fontSize: 13.0,
+                  color: Colors.indigo,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 3.0),
           DropdownButtonFormField<String>(
             decoration: InputDecorations.authDecoration(
               hintText: hintText,
@@ -84,7 +104,7 @@ class LabeledSelect extends StatelessWidget {
             isExpanded: true,
             value: selected,
             style: const TextStyle(
-              fontSize: 14.0,
+              fontSize: 13.0,
               color: Colors.black,
               overflow: TextOverflow.ellipsis,
             ),
@@ -118,14 +138,14 @@ class LabeledWidgetReadonly extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 15.0),
+      margin: const EdgeInsets.only(bottom: 13.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: const TextStyle(fontSize: 16.0)),
-          const SizedBox(height: 5.0),
+          Text(label, style: const TextStyle(fontSize: 13.0)),
+          const SizedBox(height: 3.0),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -139,7 +159,7 @@ class LabeledWidgetReadonly extends StatelessWidget {
               ],
               borderRadius: BorderRadius.circular(20.0),
             ),
-            child: Text(value),
+            child: Text(value, style: const TextStyle(fontSize: 13.0)),
           ),
         ],
       ),

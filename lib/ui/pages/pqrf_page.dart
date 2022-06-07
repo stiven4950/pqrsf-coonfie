@@ -41,12 +41,27 @@ class PqrfPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal:
                     ResponsiveWidget.widthInScreen(context, 25, 25, 30, 100),
-                vertical:
-                    ResponsiveWidget.widthInScreen(context, 18, 18, 30, 50),
+                vertical: ResponsiveWidget.widthInScreen(context, 8, 8, 10, 10),
               ),
               child: Column(
                 children: [
-                  ResponsiveWidget(
+                  Container(
+                    margin: const EdgeInsets.all(20),
+                    child: const Text(
+                      'Apreciado usuario, le damos la bienvenida a este espacio en el que podrá radicar peticiones, quejas, reclamos sugerencias y felicitaciones, consultar el estado de estas, así como la(s) respuesta(s) generada(s). Le invitamos a seleccionar a continuación el trámite que desea realizar.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                  ),
+
+                  Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    children: childrenButtonSection,
+                    spacing:
+                        ResponsiveWidget.widthInScreen(context, 0, 5, 5, 40),
+                  ),
+
+                  /* ResponsiveWidget(
                     largeScreen: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: childrenButtonSection,
@@ -62,7 +77,7 @@ class PqrfPage extends StatelessWidget {
                     extraSmallScreen: Column(
                       children: childrenButtonSection,
                     ),
-                  ),
+                  ), */
 
                   // -------------------------------------------------------------
                   Visibility(
@@ -80,43 +95,53 @@ class PqrfPage extends StatelessWidget {
                   // -------------------------------------------------------------
                   Visibility(
                     visible: !(menuSection.menu == 3),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: ResponsiveWidget.isExtraSmallScreen(context) ||
-                              ResponsiveWidget.isSmallScreen(context)
-                          ? [
-                              CircularButton(
-                                tooltip: 'Adjuntar archivos',
-                                icon: Icons.cloud_upload_rounded,
-                                onPressed: () => _selectDocumentsUpload(),
-                              ),
-                              CircularButton(
-                                tooltip: 'Enviar formulario',
-                                icon: Icons.send,
-                                onPressed: () {
-                                  pqrsfProvider.validateForm();
-                                  _display(context);
-                                },
-                              ),
-                            ]
-                          : [
-                              GradientButtonExtended(
-                                text: "Adjuntar",
-                                icon: Icons.cloud_upload_rounded,
-                                onPressed: () => _selectDocumentsUpload(),
-                              ),
-                              GradientButtonExtended(
-                                text: "Enviar",
-                                icon: Icons.send,
-                                onPressed: () {
-                                  pqrsfProvider.validateForm();
-                                  _display(context);
-                                  pqrsfProvider.isValidForm()
-                                      ? pqrsfProvider.sendData(menuSection.menu)
-                                      : print("Paila");
-                                },
-                              ),
-                            ],
+                    child: Column(
+                      children: [
+                        Wrap(
+                          alignment: WrapAlignment.spaceBetween,
+                          spacing: 100,
+                          children: ResponsiveWidget.isExtraSmallScreen(
+                                      context) ||
+                                  ResponsiveWidget.isSmallScreen(context)
+                              ? [
+                                  CircularButton(
+                                    tooltip: 'Adjuntar archivos',
+                                    icon: Icons.cloud_upload_rounded,
+                                    onPressed: () => _selectDocumentsUpload(),
+                                  ),
+                                  CircularButton(
+                                    tooltip: 'Enviar formulario',
+                                    icon: Icons.send,
+                                    onPressed: () {
+                                      pqrsfProvider.validateForm();
+                                      _display(context);
+                                    },
+                                  ),
+                                ]
+                              : [
+                                  GradientButtonExtended(
+                                    text: "Adjuntar",
+                                    icon: Icons.cloud_upload_rounded,
+                                    onPressed: () => _selectDocumentsUpload(),
+                                  ),
+                                  GradientButtonExtended(
+                                    text: "Enviar",
+                                    icon: Icons.send,
+                                    onPressed: () {
+                                      pqrsfProvider.validateForm();
+                                      _display(context);
+                                      pqrsfProvider.isValidForm()
+                                          ? pqrsfProvider
+                                              .sendData(menuSection.menu)
+                                          : print("Paila");
+
+                                      pqrsfProvider.sendData(menuSection.menu);
+                                    },
+                                  ),
+                                ],
+                        ),
+                        const SizedBox(height: 100),
+                      ],
                     ),
                   ),
                 ],

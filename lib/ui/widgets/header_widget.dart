@@ -11,18 +11,18 @@ class HeaderWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: size.width < 700 ? 10 : 40.0),
       width: double.infinity,
-      height: 90,
+      height: 70,
       decoration: const BoxDecoration(color: Color(0xFF4054B2)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
             "assets/data/images/logo.png",
-            height: ResponsiveWidget.isExtraSmallScreen(context) ? 38 : 50,
+            height: ResponsiveWidget.isExtraSmallScreen(context) ? 30 : 40,
           ),
           FittedBox(
             child: Text(
-              "Sistema PQRSF",
+              "Recepción de Peticiones, Quejas, Reclamos, Sugerencias y Felicitaciones",
               style: TextStyle(
                 color: Colors.white,
                 fontSize:
@@ -36,15 +36,16 @@ class HeaderWidget extends StatelessWidget {
                   icon: const Icon(
                     Icons.arrow_back_ios,
                     color: Colors.white,
-                  ))
+                  ),
+                )
               : ElevatedButton(
                   onPressed: () {},
                   child: Row(
                     children: const [
-                      Icon(Icons.arrow_back_ios),
+                      Icon(Icons.arrow_back_ios, size: 14),
                       Text(
                         "Regresar",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        style: TextStyle(color: Colors.white, fontSize: 14),
                       )
                     ],
                   ),
@@ -58,7 +59,7 @@ class HeaderWidget extends StatelessWidget {
                     ),
                     padding: MaterialStateProperty.resolveWith(
                       (states) => const EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 20.0),
+                          horizontal: 30.0, vertical: 18.0),
                     ),
                     backgroundColor: MaterialStateProperty.resolveWith(
                         (states) => const Color(0xFF596FD7)),

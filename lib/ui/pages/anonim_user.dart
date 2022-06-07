@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +23,21 @@ class AnonimUser extends StatelessWidget {
           size.width * (1 / 4),
         ),
         child: Column(
-          children: const [
-            SizedBox(
-              child: Text("Aquí va la leyenda"),
+          children: [
+            const Text(
+              "Señor usuario, es necesario que tenga en cuenta que, al ser una radicación anónima, no se generará respuesta a la PQRSF interpuesta por usted. Los datos suministrados, se tomarán en consideración para ejecutar acciones o investigaciones internas en nuestra entidad.",
+              textAlign: TextAlign.justify,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
+            const SizedBox(height: 20),
+            SlideInLeft(
+              child: Image.asset('assets/data/images/flight.png'),
+              duration: const Duration(milliseconds: 2000),
+              delay: const Duration(milliseconds: 400),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

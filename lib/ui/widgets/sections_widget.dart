@@ -24,7 +24,7 @@ class SectionsPQRSF extends StatelessWidget {
         size.width * .95,
         size.width * .9,
       ),
-      constraints: const BoxConstraints(minHeight: 400.0),
+      constraints: const BoxConstraints(minHeight: 300.0),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: Colors.grey, width: 1.0),
@@ -33,16 +33,12 @@ class SectionsPQRSF extends StatelessWidget {
       ),
       child: Form(
         key: pqrsfProvider.formKey,
-        child: size.width < 700
-            ? Column(children: children)
-            : Row(
-                mainAxisAlignment:
-                    !pqrsfProvider.thereIsAnswer && menuSection.menu == 3
-                        ? MainAxisAlignment.center
-                        : MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: children,
-              ),
+        child: Wrap(
+          alignment: !pqrsfProvider.thereIsAnswer && menuSection.menu == 3
+              ? WrapAlignment.center
+              : WrapAlignment.spaceAround,
+          children: children,
+        ),
       ),
     );
   }

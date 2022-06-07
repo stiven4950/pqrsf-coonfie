@@ -14,7 +14,8 @@ dependencies:
 
   provider: ^6.0.2
   animate_do: ^2.1.0
-  http: ^0.13.3
+  http: ^0.13.2
+  dio: ^4.0.6
   file_picker: ^4.5.1
   searchfield: ^0.6.5
 
@@ -41,6 +42,7 @@ flutter:
   assets:
     - assets/data/images/logo.png
     - assets/data/images/result.jpg
+    - assets/data/images/flight.png
 
   fonts:
     - family: Poppins

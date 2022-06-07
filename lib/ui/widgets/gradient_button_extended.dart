@@ -54,7 +54,7 @@ class GradientButtonExtended extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.0),
             ),
           ),
-          minimumSize: MaterialStateProperty.all(const Size(150, 50)),
+          minimumSize: MaterialStateProperty.all(const Size(150, 47)),
           backgroundColor: MaterialStateProperty.all(Colors.transparent),
           // elevation: MaterialStateProperty.all(3),
           shadowColor: MaterialStateProperty.all(Colors.transparent),

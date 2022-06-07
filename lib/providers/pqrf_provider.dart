@@ -7,6 +7,7 @@ import 'package:pqrf_coonfie/models/agency_model.dart';
 import 'package:pqrf_coonfie/models/matter_model.dart';
 import 'package:pqrf_coonfie/models/municipio_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 import 'package:pqrf_coonfie/types/types.dart';
 
@@ -17,6 +18,9 @@ class PQRSFProvider extends ChangeNotifier {
   }
 
   final String _baseUrl = '10.10.2.75';
+  final String _baseTokenDynamics = 'login.microsoftonline.com';
+  final String _baseDevelopmentDynamics = 'coonfiedesarrollo.crm2.dynamics.com';
+
   Future<String> _getJsonData(
     String endpoint, [
     Map<String, dynamic>? queryParameters,
@@ -329,11 +333,66 @@ class PQRSFProvider extends ChangeNotifier {
 
   bool get thereIsAnswer => _thereIsAnswer;
 
+  // Obtain token
+  Future<String> _obtainToken() async {
+    final uri = Uri.https(
+      _baseTokenDynamics,
+      'ac6b4b78-6fab-4fa5-8d7e-cc1075ab6fb3/oauth2/token',
+    );
+    try {
+      final response = await http.post(
+        uri,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: {
+          "client_Id": "4372bc64-9fcd-4ff7-b27e-e01d625e1f63",
+          "client_Secret": "BOh7Q~kWP3JKz6LMyWqJtVtztLAVCqAYydiRF",
+          "resource": "https://coonfiedesarrollo.crm2.dynamics.com/",
+          "grant_type": "client_credentials",
+        },
+      );
+
+      final data = json.decode(response.body);
+
+      return data['access_token'];
+    } catch (e) {
+      print(e.toString());
+    }
+    return 'Falló la petición al sitio';
+  }
+
   // Process Data
+
   Future<bool> sendData(int menu) async {
-    final uri = Uri.http('data.com', 'send/user');
+    /*
+      // 
+      var formData = FormData.fromMap({
+      "client_Id": "4372bc64-9fcd-4ff7-b27e-e01d625e1f63",
+      "client_Secret": "BOh7Q~kWP3JKz6LMyWqJtVtztLAVCqAYydiRF",
+      "resource": "https://coonfiedesarrollo.crm2.dynamics.com/",
+      "grant_type": "client_credentials",
+    });
+
+    try {
+      var response = await Dio().post(
+        'https://login.microsoftonline.com/ac6b4b78-6fab-4fa5-8d7e-cc1075ab6fb3/oauth2/token',
+        data: formData,
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+        ),
+      );
+
+      print(response.data);
+    } catch (e) {
+      print(e.toString());
+    } */
+
+    final token = await _obtainToken();
+    final uri =
+        Uri.https(_baseDevelopmentDynamics, 'api/data/v9.2/API_REQUEST');
     final request = http.MultipartRequest('POST', uri);
-    // request.headers['authorization'] = 'Token ';
+    request.headers['Authorization'] = 'Bearer $token';
 
     if (menu != 3) {
       if (picker != null) {
@@ -349,27 +408,42 @@ class PQRSFProvider extends ChangeNotifier {
         });
       }
       if (menu == 1) {
-        request.fields['document_type'] = documentType;
-        request.fields['document_number'] = documentNumber;
-        request.fields['fullname'] = fullName;
-        request.fields['telephone'] = telephone;
-        request.fields['phone'] = phone;
-        request.fields['email'] = email;
+        request.fields['API_Field_TipoDocumento'] = 'CC';
+        request.fields['API_Field_Identificacion'] = documentNumber;
+
+        request.fields['API_Field_FirstName'] = fullName;
+        request.fields['API_Field_SecondName'] = fullName;
+        request.fields['API_Field_LastName'] = fullName;
+        request.fields['API_Field_SecondLastName'] = fullName;
+
+        request.fields['API_Field_Phone'] = telephone;
+        request.fields['API_Field_Mobile'] = phone;
+        request.fields['API_Field_Email'] = email;
+        request.fields['API_Field_MedioResp'] = '134300001'; //medium;
+
+        request.fields['API_Field_FechaRadicacion'] =
+            DateTime.now().toIso8601String();
+        request.fields['API_Field_FechaLimiteResp'] =
+            DateTime.now().toIso8601String();
+        request.fields['API_Field_FechaRemision'] =
+            DateTime.now().toIso8601String();
+
+        request.fields['API_Field_Asunto'] = matter; // Agradecimiento
+        request.fields['API_Field_State'] = "1";
+        request.fields['API_Field_Channel'] = "2";
+        request.fields['API_Field_Oficina'] = "134300010";
+        request.fields['API_Field_Partner'] = "true";
+        request.fields['API_Field_Prioridad'] = "134300002";
+        request.fields['API_Field_TipoSolicitud'] = typeRequest; // Felicitación
+
         request.fields['city'] = city;
         request.fields['address'] = address;
-        request.fields['agency'] = agency;
-        request.fields['asociated'] = asociated;
-        request.fields['type_request'] = typeRequest;
-        request.fields['matter'] = matter;
-        request.fields['medium'] = medium;
         request.fields['description'] = description;
-        request.fields['user_type'] = '1';
       } else {
-        request.fields['fullname'] = fullName;
-        request.fields['type_request'] = typeRequest;
-        request.fields['matter'] = matter;
+        request.fields['API_Field_TipoSolicitud'] = typeRequest;
+        request.fields['API_Field_Asunto'] = matter;
         request.fields['description'] = description;
-        request.fields['user_type'] = '0';
+        request.fields['API_Field_Partner'] = "false";
       }
 
       // Makes send
@@ -377,8 +451,6 @@ class PQRSFProvider extends ChangeNotifier {
       final response = await http.Response.fromStream(streamedResponse);
     } else {
       final uri = Uri.http('data.com', 'consult/state', {
-        'document_type': documentType,
-        'document_number': documentNumber,
         'type_request': typeRequest,
         'matter': matter,
       });

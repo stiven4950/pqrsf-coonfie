@@ -26,11 +26,7 @@ class ButtonSectionWidget extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(
-              fontSize: ResponsiveWidget.isExtraSmallScreen(context)
-                  ? 16
-                  : ResponsiveWidget.isMediumScreen(context)
-                      ? 18
-                      : 20,
+              fontSize: ResponsiveWidget.widthInScreen(context, 15, 16, 17, 17),
             ),
           ),
         ),

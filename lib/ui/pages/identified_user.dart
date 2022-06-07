@@ -127,10 +127,22 @@ class UserIdentifiedSection extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Ciudad o municipio',
-                    style: TextStyle(fontSize: 16.0)),
-                const SizedBox(height: 5.0),
+                Row(
+                  children: const [
+                    Text("Ciudad o municipio de residencia",
+                        style: TextStyle(fontSize: 13.0)),
+                    Text(
+                      '*',
+                      style: TextStyle(
+                        fontSize: 13.0,
+                        color: Colors.indigo,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 3.0),
                 SearchField<Municipios>(
+                  searchStyle: const TextStyle(fontSize: 13.0),
                   suggestions: pqrsfProvider.cityItems
                       .map((e) => SearchFieldListItem<Municipios>(
                           e.municipioDepartamento,
@@ -153,7 +165,7 @@ class UserIdentifiedSection extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 15.0),
+            const SizedBox(height: 10.0),
             LabeledSelect(
               data: 'Tipo de petición',
               hintText: 'Seleccione...',

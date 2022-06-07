@@ -26,13 +26,15 @@ class Consult extends StatelessWidget {
           children: [
             const Text(
               "Para realizar la consulta es importante que tenga disponible el número de radicación que se informó al momento de realizar su solicitud.",
+              textAlign: TextAlign.justify,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 10),
             const Text(
-              "Por favor seleccione el tipo de documento, registre el número de documento y el número de radicación.",
+              "Por favor indique el número de radicado.",
+              textAlign: TextAlign.start,
             ),
             const SizedBox(height: 10),
             LabeledWidget(
@@ -102,7 +104,7 @@ class Consult extends StatelessWidget {
                       child: const Text(
                         "Respuesta",
                         style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

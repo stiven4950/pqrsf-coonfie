@@ -17,7 +17,8 @@ class InputDecorations {
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
         hintText: hintText,
-        contentPadding: const EdgeInsets.fromLTRB(15, 13, 10, 13),
+        hintStyle: const TextStyle(fontSize: 13.0),
+        contentPadding: const EdgeInsets.fromLTRB(11, 11, 11, 11),
         isDense: true,
       );
 }
