@@ -18,18 +18,9 @@ class PqrfPage extends StatelessWidget {
     final menuSection = Provider.of<MenuSection>(context);
 
     const List<Widget> childrenButtonSection = [
-      ButtonSectionWidget(
-        title: "Usuario Identificado",
-        order: 1,
-      ),
-      ButtonSectionWidget(
-        title: "Usuario anónimo",
-        order: 2,
-      ),
-      ButtonSectionWidget(
-        title: "Consulta",
-        order: 3,
-      ),
+      ButtonSectionWidget(title: "Usuario Identificado", order: 1),
+      ButtonSectionWidget(title: "Usuario anónimo", order: 2),
+      ButtonSectionWidget(title: "Consulta", order: 3),
     ];
 
     return Scaffold(
@@ -60,24 +51,6 @@ class PqrfPage extends StatelessWidget {
                     spacing:
                         ResponsiveWidget.widthInScreen(context, 0, 5, 5, 40),
                   ),
-
-                  /* ResponsiveWidget(
-                    largeScreen: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: childrenButtonSection,
-                    ),
-                    mediumScreen: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: childrenButtonSection,
-                    ),
-                    smallScreen: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: childrenButtonSection,
-                    ),
-                    extraSmallScreen: Column(
-                      children: childrenButtonSection,
-                    ),
-                  ), */
 
                   // -------------------------------------------------------------
                   Visibility(
@@ -112,10 +85,11 @@ class PqrfPage extends StatelessWidget {
                                   CircularButton(
                                     tooltip: 'Enviar formulario',
                                     icon: Icons.send,
-                                    onPressed: () {
-                                      pqrsfProvider.validateForm();
-                                      _display(context);
-                                    },
+                                    onPressed: () async => _proccessInfo(
+                                      context,
+                                      pqrsfProvider,
+                                      menuSection,
+                                    ),
                                   ),
                                 ]
                               : [
@@ -127,16 +101,11 @@ class PqrfPage extends StatelessWidget {
                                   GradientButtonExtended(
                                     text: "Enviar",
                                     icon: Icons.send,
-                                    onPressed: () {
-                                      pqrsfProvider.validateForm();
-                                      _display(context);
-                                      pqrsfProvider.isValidForm()
-                                          ? pqrsfProvider
-                                              .sendData(menuSection.menu)
-                                          : print("Paila");
-
-                                      pqrsfProvider.sendData(menuSection.menu);
-                                    },
+                                    onPressed: () async => _proccessInfo(
+                                      context,
+                                      pqrsfProvider,
+                                      menuSection,
+                                    ),
                                   ),
                                 ],
                         ),
@@ -154,18 +123,48 @@ class PqrfPage extends StatelessWidget {
   }
 }
 
-Future _display(BuildContext context) => showDialog(
-      context: context,
-      builder: (BuildContext context) => CustomDialog(
-        title: 'Proceso realizado con éxito!',
-        description: "",
-        buttonText: "Agregar",
-        color: const Color(0xFF4054B2),
-        icon: Icons.check_circle,
-        widget: const PositiveResult(),
-        action: () {},
-      ),
-    );
+Future _display(BuildContext context) {
+  final menuSection = Provider.of<MenuSection>(context, listen: false);
+
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) => CustomDialog(
+      title: 'Proceso realizado con éxito!',
+      description: "",
+      buttonText: "Agregar",
+      color: const Color(0xFF4054B2),
+      icon: Icons.check_circle,
+      widget: menuSection.menu != 2
+          ? const PositiveResult()
+          : Container(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+              child: const Text(
+                'Hemos recibido tu reporte, recuerda que en esta sección no se genera número de radicado.',
+                textAlign: TextAlign.justify,
+              ),
+            ),
+      action: () {},
+    ),
+  );
+}
+
+Future<void> _proccessInfo(
+  BuildContext context,
+  PQRSFProvider pqrsfProvider,
+  MenuSection menuSection,
+) async {
+  pqrsfProvider.validateForm();
+
+  if (pqrsfProvider.isValidForm()) {
+    if (await pqrsfProvider.sendData(menuSection.menu)) {
+      _display(context);
+    } else {
+      // Se intentaron enviar los datos pero hubo un error
+    }
+  } else {
+    // Corregir los errores, completar el formulario
+  }
+}
 
 void _selectDocumentsUpload() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(

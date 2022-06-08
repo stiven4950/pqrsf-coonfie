@@ -22,7 +22,7 @@ class HeaderWidget extends StatelessWidget {
           ),
           FittedBox(
             child: Text(
-              "Recepción de Peticiones, Quejas, Reclamos, Sugerencias y Felicitaciones",
+              "Recepción de PQRSF",
               style: TextStyle(
                 color: Colors.white,
                 fontSize:

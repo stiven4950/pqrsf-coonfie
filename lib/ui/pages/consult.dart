@@ -11,6 +11,7 @@ class Consult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pqrsfProvider = Provider.of<PQRSFProvider>(context);
+    final menuSection = Provider.of<MenuSection>(context);
     final size = MediaQuery.of(context).size;
 
     final List<Widget> children = [
@@ -46,7 +47,7 @@ class Consult extends StatelessWidget {
                 if (value!.isEmpty) {
                   return "Número de radicado es requerido";
                 }
-                String pattern = r'^([a-zA-Z]{3}-\d{6}-[a-zA-Z0-9]{6})$';
+                String pattern = r'^([a-zA-Z]{3}-\d{5}-[a-zA-Z0-9]{6})$';
                 RegExp regExp = RegExp(pattern);
 
                 return regExp.hasMatch(value)
@@ -61,6 +62,7 @@ class Consult extends StatelessWidget {
               onPressed: () {
                 pqrsfProvider.validateForm();
                 pqrsfProvider.thereIsAnswer = true;
+                pqrsfProvider.sendData(menuSection.menu);
               },
             ),
           ],
