@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:pqrf_coonfie/ui/pages/anonim_user.dart';
@@ -93,12 +93,12 @@ class PqrfPage extends StatelessWidget {
                                   ),
                                 ]
                               : [
-                                  GradientButtonExtended(
+                                  CustomButton(
                                     text: "Adjuntar",
                                     icon: Icons.cloud_upload_rounded,
                                     onPressed: () => _selectDocumentsUpload(),
                                   ),
-                                  GradientButtonExtended(
+                                  CustomButton(
                                     text: "Enviar",
                                     icon: Icons.send,
                                     onPressed: () async => _proccessInfo(

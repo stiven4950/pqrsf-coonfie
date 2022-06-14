@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:pqrf_coonfie/ui/widgets/custom_button_icon_left.dart';
 import 'package:pqrf_coonfie/ui/widgets/responsive.dart';
 
 class HeaderWidget extends StatelessWidget {
@@ -38,32 +40,10 @@ class HeaderWidget extends StatelessWidget {
                     color: Colors.white,
                   ),
                 )
-              : ElevatedButton(
+              : CustomButtonIconLef(
+                  text: 'Regresar',
+                  icon: Icons.arrow_back_ios,
                   onPressed: () {},
-                  child: Row(
-                    children: const [
-                      Icon(Icons.arrow_back_ios, size: 14),
-                      Text(
-                        "Regresar",
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      )
-                    ],
-                  ),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.resolveWith(
-                      (states) => const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20.0),
-                        ),
-                      ),
-                    ),
-                    padding: MaterialStateProperty.resolveWith(
-                      (states) => const EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 18.0),
-                    ),
-                    backgroundColor: MaterialStateProperty.resolveWith(
-                        (states) => const Color(0xFF596FD7)),
-                  ),
                 ),
         ],
       ),

@@ -1,5 +1,5 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:provider/provider.dart';
 
 import 'package:pqrf_coonfie/ui/widgets/widgets.dart';
@@ -102,7 +102,7 @@ class AnonimUser extends StatelessWidget {
                     ? null
                     : 'Descripción es requerido';
               },
-              maxLines: 10,
+              maxLines: 11,
             ),
           ],
         ),

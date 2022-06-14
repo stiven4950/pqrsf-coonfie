@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pqrf_coonfie/ui/widgets/responsive.dart';
 import 'package:provider/provider.dart';
 
+import 'package:pqrf_coonfie/ui/widgets/responsive.dart';
 import 'package:pqrf_coonfie/providers/providers.dart';
 
 class SectionsPQRSF extends StatelessWidget {
@@ -27,7 +27,8 @@ class SectionsPQRSF extends StatelessWidget {
       constraints: const BoxConstraints(minHeight: 300.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.grey, width: 1.0),
+        border: Border.all(
+            color: const Color.fromARGB(255, 188, 188, 188), width: 1.0),
         boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 4.0)],
         borderRadius: BorderRadius.circular(10.0),
       ),

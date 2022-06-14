@@ -18,7 +18,7 @@ class InputDecorations {
         ),
         hintText: hintText,
         hintStyle: const TextStyle(fontSize: 13.0),
-        contentPadding: const EdgeInsets.fromLTRB(11, 11, 11, 11),
+        contentPadding: const EdgeInsets.fromLTRB(11, 12, 11, 12),
         isDense: true,
       );
 }

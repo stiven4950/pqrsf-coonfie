@@ -1,5 +1,6 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:animate_do/animate_do.dart';
+
 import 'package:pqrf_coonfie/ui/widgets/gradient_button_extended.dart';
 import 'package:pqrf_coonfie/ui/widgets/responsive.dart';
 

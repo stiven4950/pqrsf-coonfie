@@ -56,7 +56,7 @@ class Consult extends StatelessWidget {
               },
             ),
             const SizedBox(height: 20),
-            GradientButtonExtended(
+            CustomButton(
               text: "Consultar",
               icon: Icons.manage_search_rounded,
               onPressed: () {

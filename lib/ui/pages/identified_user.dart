@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pqrf_coonfie/models/models.dart';
-import 'package:pqrf_coonfie/ui/decorations/input_decorations.dart';
 import 'package:provider/provider.dart';
-
-import 'package:pqrf_coonfie/ui/widgets/widgets.dart';
-import 'package:pqrf_coonfie/providers/providers.dart';
 import 'package:searchfield/searchfield.dart';
+
+import 'package:pqrf_coonfie/models/models.dart';
+import 'package:pqrf_coonfie/providers/providers.dart';
+import 'package:pqrf_coonfie/ui/decorations/input_decorations.dart';
+import 'package:pqrf_coonfie/ui/widgets/widgets.dart';
 
 class UserIdentifiedSection extends StatelessWidget {
   const UserIdentifiedSection({Key? key}) : super(key: key);
@@ -225,11 +225,11 @@ class UserIdentifiedSection extends StatelessWidget {
               initialValue: pqrsfProvider.description,
               onChanged: (value) => pqrsfProvider.description = value,
               validator: (value) {
-                return value!.length > 1 && value.length < 300
+                return value!.length > 1 && value.length < 1000
                     ? null
                     : 'Descripción es requerido';
               },
-              maxLines: 10,
+              maxLines: 8,
             ),
           ],
         ),

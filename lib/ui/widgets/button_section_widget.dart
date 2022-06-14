@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:pqrf_coonfie/providers/menu_section.dart';
 import 'package:pqrf_coonfie/ui/widgets/responsive.dart';
-import 'package:provider/provider.dart';
 
 class ButtonSectionWidget extends StatelessWidget {
   final String title;
