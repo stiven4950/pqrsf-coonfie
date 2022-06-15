@@ -172,7 +172,7 @@ class Consult extends StatelessWidget {
                   ),
                   visible: !(size.width < 700),
                 ),
-                GradientButtonExtended(
+                CustomButton(
                   text: "Imprimir",
                   icon: Icons.print_rounded,
                   onPressed: () {},

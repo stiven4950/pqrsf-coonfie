@@ -99,7 +99,7 @@ class PqrfPage extends StatelessWidget {
                                     onPressed: () => _selectDocumentsUpload(),
                                   ),
                                   CustomButton(
-                                    text: "Enviar",
+                                    text: "Enviar   ",
                                     icon: Icons.send,
                                     onPressed: () async => _proccessInfo(
                                       context,

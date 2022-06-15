@@ -16,7 +16,7 @@ class SectionsPQRSF extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(top: 10.0, bottom: 20.0),
-      padding: const EdgeInsets.all(30.0),
+      padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 20.0),
       width: ResponsiveWidget.widthInScreen(
         context,
         size.width,
@@ -29,7 +29,9 @@ class SectionsPQRSF extends StatelessWidget {
         color: Colors.white,
         border: Border.all(
             color: const Color.fromARGB(255, 188, 188, 188), width: 1.0),
-        boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 4.0)],
+        boxShadow: const [
+          BoxShadow(color: Color.fromARGB(255, 188, 187, 187), blurRadius: 4.0)
+        ],
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Form(
