@@ -21,4 +21,7 @@ final lightThemeData = ThemeData(
   //iconTheme: const IconThemeData(color: Colors.blueGrey),
   brightness: Brightness.light,
   fontFamily: "Poppins",
+  scrollbarTheme: const ScrollbarThemeData().copyWith(
+    thumbColor: MaterialStateProperty.all(Colors.indigo.withOpacity(0.5)),
+  ),
 );
