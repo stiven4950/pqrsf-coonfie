@@ -147,17 +147,14 @@ class PQRSFProvider extends ChangeNotifier {
 
   String _documentNumber = '';
   String _fullName = '';
-  String _telephone = '';
   String _phone = '';
   String _email = '';
   String _city = '';
   String _address = '';
-  String _agency = '';
   String _typeRequest = '';
   String _matter = '';
   String _medium = '';
   String _description = '';
-  String _regExpDocumentType = r'^(\d{4,10})$';
   String _filingNumber = '';
 
   // Upload variable
@@ -189,11 +186,6 @@ class PQRSFProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  set telephone(String value) {
-    _telephone = value;
-    notifyListeners();
-  }
-
   set phone(String value) {
     _phone = value;
     notifyListeners();
@@ -211,11 +203,6 @@ class PQRSFProvider extends ChangeNotifier {
 
   set address(String value) {
     _address = value;
-    notifyListeners();
-  }
-
-  set agency(String value) {
-    _agency = value;
     notifyListeners();
   }
 
@@ -239,11 +226,6 @@ class PQRSFProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  set regExpDocumentType(String value) {
-    _regExpDocumentType = value;
-    notifyListeners();
-  }
-
   set filingNumber(String value) {
     _filingNumber = value;
     notifyListeners();
@@ -252,17 +234,14 @@ class PQRSFProvider extends ChangeNotifier {
   // Getters
   String get documentNumber => _documentNumber;
   String get fullName => _fullName;
-  String get telephone => _telephone;
   String get phone => _phone;
   String get email => _email;
   String get city => _city;
   String get address => _address;
-  String get agency => _agency;
   String get typeRequest => _typeRequest;
   String get matter => _matter;
   String get medium => _medium;
   String get description => _description;
-  String get regExpDocumentType => _regExpDocumentType;
   String get filingNumber => _filingNumber;
 
   // RESPUESTA
@@ -371,7 +350,7 @@ class PQRSFProvider extends ChangeNotifier {
           "API_Field_LastName": name['API_Field_LastName'],
           "API_Field_SecondLastName": name['API_Field_SecondLastName'],
 
-          "API_Field_Phone": telephone,
+          "API_Field_Phone": '',
           "API_Field_Mobile": phone,
           "API_Field_Email": email,
           "API_Field_MedioResp": '134300001', //medium;

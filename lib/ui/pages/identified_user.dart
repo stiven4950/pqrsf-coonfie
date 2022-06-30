@@ -32,7 +32,7 @@ class UserIdentifiedSection extends StatelessWidget {
               initialValue: pqrsfProvider.documentNumber,
               onChanged: (value) => pqrsfProvider.documentNumber = value,
               validator: (value) {
-                String pattern = pqrsfProvider.regExpDocumentType;
+                String pattern = r'^(\d{4,10})$';
                 RegExp regExp = RegExp(pattern);
 
                 if (value!.isEmpty) {

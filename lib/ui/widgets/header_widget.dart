@@ -19,7 +19,7 @@ class HeaderWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
-            "assets/data/images/logo.png",
+            "assets/data/images/logofondo.png",
             height: ResponsiveWidget.isExtraSmallScreen(context) ? 30 : 40,
           ),
           FittedBox(
