@@ -156,7 +156,9 @@ Future<void> _proccessInfo(
   pqrsfProvider.validateForm();
 
   if (pqrsfProvider.isValidForm()) {
-    if (await pqrsfProvider.sendData(menuSection.menu)) {
+    if (menuSection.menu == 1
+        ? await pqrsfProvider.registerIdentifiedUser()
+        : await pqrsfProvider.registerAnonimousUser()) {
       _display(context);
     } else {
       // Se intentaron enviar los datos pero hubo un error

@@ -47,7 +47,7 @@ class Consult extends StatelessWidget {
                 if (value!.isEmpty) {
                   return "Número de radicado es requerido";
                 }
-                String pattern = r'^([a-zA-Z]{3}-\d{5}-[a-zA-Z0-9]{6})$';
+                String pattern = r'^([a-zA-Z]{3}-\d{6}-[a-zA-Z0-9]{6})$';
                 RegExp regExp = RegExp(pattern);
 
                 return regExp.hasMatch(value)
@@ -59,10 +59,10 @@ class Consult extends StatelessWidget {
             CustomButton(
               text: "Consultar",
               icon: Icons.manage_search_rounded,
-              onPressed: () {
+              onPressed: () async {
                 pqrsfProvider.validateForm();
                 pqrsfProvider.thereIsAnswer = true;
-                pqrsfProvider.sendData(menuSection.menu);
+                await pqrsfProvider.consult();
               },
             ),
           ],

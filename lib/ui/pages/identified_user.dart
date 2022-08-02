@@ -141,12 +141,10 @@ class UserIdentifiedSection extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 3.0),
-                SearchField<Municipios>(
+                SearchField<City>(
                   searchStyle: const TextStyle(fontSize: 13.0),
                   suggestions: pqrsfProvider.cityItems
-                      .map((e) => SearchFieldListItem<Municipios>(
-                          e.municipioDepartamento,
-                          item: e))
+                      .map((e) => SearchFieldListItem<City>(e.name, item: e))
                       .toList(),
                   suggestionState: Suggestion.hidden,
                   hasOverlay: true,
@@ -156,7 +154,7 @@ class UserIdentifiedSection extends StatelessWidget {
                   maxSuggestionsInViewPort: 5,
                   itemHeight: 40,
                   onSuggestionTap: (x) {
-                    pqrsfProvider.city = x.item!.municipioId;
+                    pqrsfProvider.city = x.item!.cod;
                     FocusScope.of(context).requestFocus(FocusNode());
                   },
                   validator: (value) {
