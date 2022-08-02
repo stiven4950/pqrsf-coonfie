@@ -18,7 +18,7 @@ class Filling {
     required this.files,
     required this.fillingDate,
     required this.uid,
-    this.responseDate,
+    //this.responseDate,
   });
 
   User user;
@@ -32,7 +32,7 @@ class Filling {
   String state;
   List<dynamic> files;
   DateTime fillingDate;
-  DateTime? responseDate;
+  //DateTime? responseDate;
   String uid;
 
   factory Filling.fromRawJson(String str) => Filling.fromJson(json.decode(str));
@@ -51,7 +51,7 @@ class Filling {
         state: json["state"],
         files: List<dynamic>.from(json["files"].map((x) => x)),
         fillingDate: DateTime.parse(json["filling_date"]),
-        responseDate: DateTime.parse(json["response_date"]),
+        //responseDate: DateTime.parse(json["response_date"]),
         uid: json["uid"],
       );
 

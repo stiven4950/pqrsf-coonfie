@@ -355,15 +355,16 @@ class PQRSFProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       final filling = Filling.fromRawJson(response.body);
 
-      fullnameAnswer = filling.user.fullname;
+      fullnameAnswer = filling.user.fullname.toUpperCase();
       documentNumberAnswer = filling.user.documentNumber.toString();
       typeRequestAnswer = filling.matter.name;
       filingDateAnswer = filling.fillingDate.toIso8601String();
       filingNumberAnswer = filingNumber;
       proccessStateAnswer = filling.state;
-      dateAnswer = filling.responseDate != null
+      dateAnswer = /* filling.responseDate != null
           ? filling.responseDate!.toIso8601String()
-          : 'Sin resolver';
+          :  */
+          'SIN RESOLVER';
     }
     notifyListeners();
     return true;
