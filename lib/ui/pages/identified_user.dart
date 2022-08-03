@@ -154,7 +154,7 @@ class UserIdentifiedSection extends StatelessWidget {
                   maxSuggestionsInViewPort: 5,
                   itemHeight: 40,
                   onSuggestionTap: (x) {
-                    pqrsfProvider.city = x.item!.cod;
+                    pqrsfProvider.city = x.item!.id;
                     FocusScope.of(context).requestFocus(FocusNode());
                   },
                   validator: (value) {

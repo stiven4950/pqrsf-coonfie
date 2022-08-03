@@ -109,8 +109,8 @@ class PQRSFProvider extends ChangeNotifier {
   // medium
   static List<TypeSelect> mediumM = [
     TypeSelect('Seleccione...', ''),
-    TypeSelect('CORREO ELECTRÓNICO', 'C'),
-    TypeSelect('FÍSICO', 'F'),
+    TypeSelect('CORREO ELECTRÓNICO', 'Correo'),
+    TypeSelect('FÍSICO', 'Fisico'),
   ];
 
   final List<DropdownMenuItem<String>> mediumItems = mediumM

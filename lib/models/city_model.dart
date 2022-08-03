@@ -8,20 +8,20 @@ String citiesToJson(List<City> data) =>
 
 class City {
   City({
-    required this.cod,
+    required this.id,
     required this.name,
   });
 
-  String cod;
+  String id;
   String name;
 
   factory City.fromJson(Map<String, dynamic> json) => City(
-        cod: json["cod"],
+        id: json["_id"],
         name: json["name"],
       );
 
   Map<String, dynamic> toJson() => {
-        "cod": cod,
+        "_id": id,
         "name": name,
       };
 }
