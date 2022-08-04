@@ -7,7 +7,6 @@ import 'package:pqrf_coonfie/models/filling_model.dart';
 
 import 'package:pqrf_coonfie/models/models.dart';
 import 'package:pqrf_coonfie/types/types.dart';
-import 'package:pqrf_coonfie/utils/utils.dart';
 
 class PQRSFProvider extends ChangeNotifier {
   PQRSFProvider() {
@@ -245,22 +244,23 @@ class PQRSFProvider extends ChangeNotifier {
       _baseUrl,
       '/api/auth/login-uid',
     );
+
     try {
       final response = await http.post(
         uri,
-        body: {
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
           "uid": "62e88f894aa7bd143d96ff9e",
           "password": "654321##@#",
-        },
+        }),
       );
 
       final data = json.decode(response.body);
 
       return data['token'];
     } catch (e) {
-      print(e.toString());
+      return 'Falló la petición al sitio';
     }
-    return 'Falló la petición al sitio';
   }
 
   // Process Data
@@ -294,14 +294,17 @@ class PQRSFProvider extends ChangeNotifier {
     };
 
     try {
-      final response = await http.post(uri, body: body, headers: {
-        "Content-Type": 'application/json',
-        "x-token": token,
-      });
-
-      print(response.body);
+      final response = await http.post(
+        uri,
+        body: jsonEncode(body),
+        headers: {
+          "Content-Type": 'application/json',
+          "x-token": token,
+        },
+      );
+      final dataEncoded = json.decode(response.body);
+      filingNumberAnswer = dataEncoded['ticket'];
     } catch (e) {
-      print(e.toString());
       return false;
     }
 
@@ -333,17 +336,17 @@ class PQRSFProvider extends ChangeNotifier {
     };
 
     try {
-      final response = await http.post(uri, body: body, headers: {
-        "Content-Type": 'application/json',
-        "x-token": token,
-      });
-
-      print(response.body);
+      await http.post(
+        uri,
+        body: jsonEncode(body),
+        headers: {
+          "Content-Type": 'application/json',
+          "x-token": token,
+        },
+      );
     } catch (e) {
-      print(e.toString());
       return false;
     }
-    notifyListeners();
     return true;
   }
 
@@ -364,7 +367,7 @@ class PQRSFProvider extends ChangeNotifier {
       dateAnswer = /* filling.responseDate != null
           ? filling.responseDate!.toIso8601String()
           :  */
-          'SIN RESOLVER';
+          'AÚN NO SE HA DEFINIDO FECHA';
     }
     notifyListeners();
     return true;

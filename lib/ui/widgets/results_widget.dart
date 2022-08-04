@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:pqrf_coonfie/providers/providers.dart';
+import 'package:provider/provider.dart';
 
 class PositiveResult extends StatelessWidget {
-  final String generatedCode = "CAS-654875-1AY589";
   const PositiveResult({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final String filingNumberAnswer =
+        Provider.of<PQRSFProvider>(context).filingNumberAnswer;
     return Padding(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
       child: Column(
@@ -22,12 +26,14 @@ class PositiveResult extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                generatedCode,
+                filingNumberAnswer,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: filingNumberAnswer));
+                },
                 icon: const Icon(Icons.copy_rounded),
                 tooltip: 'Aquí puedes copiar el número de radicado',
               ),
